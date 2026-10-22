@@ -1,0 +1,247 @@
+
+.blend-hero-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  isolation: isolate;
+  pointer-events: none;
+  background: #050607;
+}
+
+.blend-hero-background__base {
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(
+      ellipse at 50% 42%,
+      rgba(255, 77, 35, 0.2) 0%,
+      rgba(255, 77, 35, 0.08) 24%,
+      transparent 52%
+    ),
+    radial-gradient(
+      ellipse at 52% 75%,
+      rgba(255, 107, 44, 0.15) 0%,
+      transparent 45%
+    ),
+    #050607;
+}
+
+.blend-hero-background__mesh {
+  position: absolute;
+  inset: -35%;
+  opacity: 0.95;
+  background:
+    radial-gradient(
+      ellipse at 25% 45%,
+      rgba(255, 65, 35, 0.48) 0%,
+      rgba(255, 65, 35, 0.12) 25%,
+      transparent 48%
+    ),
+    radial-gradient(
+      ellipse at 70% 42%,
+      rgba(255, 107, 44, 0.42) 0%,
+      rgba(255, 107, 44, 0.12) 28%,
+      transparent 53%
+    ),
+    radial-gradient(
+      ellipse at 48% 70%,
+      rgba(194, 48, 24, 0.22) 0%,
+      transparent 42%
+    );
+  filter: blur(48px);
+  transform: translate3d(0, 0, 0);
+  animation: blend-mesh-drift 18s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.blend-hero-background__glow {
+  position: absolute;
+  width: min(75vw, 1000px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  filter: blur(100px);
+  mix-blend-mode: screen;
+  will-change: transform, opacity;
+}
+
+.blend-hero-background__glow--red {
+  left: -25%;
+  top: 2%;
+  opacity: 0.48;
+  background: radial-gradient(
+    circle,
+    rgba(255, 65, 35, 0.32) 0%,
+    rgba(225, 47, 25, 0.12) 35%,
+    transparent 68%
+  );
+  animation: blend-red-drift 16s ease-in-out infinite alternate;
+}
+
+.blend-hero-background__glow--orange {
+  right: -25%;
+  top: 5%;
+  opacity: 0.46;
+  background: radial-gradient(
+    circle,
+    rgba(255, 107, 44, 0.38) 0%,
+    rgba(255, 107, 44, 0.12) 38%,
+    transparent 68%
+  );
+  animation: blend-orange-drift 19s ease-in-out infinite alternate;
+}
+
+.blend-hero-background__orb {
+  position: absolute;
+  width: min(60vw, 760px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 138, 80, 0.07);
+  box-shadow:
+    inset 0 0 70px rgba(255, 82, 37, 0.025),
+    0 0 80px rgba(255, 82, 37, 0.025);
+}
+
+.blend-hero-background__orb--one {
+  left: -30%;
+  top: 10%;
+  transform: scale(1.1);
+}
+
+.blend-hero-background__orb--two {
+  right: -28%;
+  top: 0;
+  transform: scale(1.25);
+}
+
+.blend-hero-background__beam {
+  position: absolute;
+  left: 50%;
+  top: 55%;
+  width: 120%;
+  height: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) rotate(-8deg);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 107, 44, 0.12) 0%,
+    rgba(255, 65, 35, 0.06) 28%,
+    transparent 70%
+  );
+  filter: blur(45px);
+}
+
+.blend-hero-background__grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.09;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.14) 1px, transparent 1px);
+  background-size: 65px 65px;
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.8),
+    transparent 90%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.8),
+    transparent 90%
+  );
+}
+
+.blend-hero-background__vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.25),
+      transparent 25%,
+      transparent 68%,
+      rgba(5, 6, 7, 0.82) 100%
+    ),
+    radial-gradient(
+      ellipse at center,
+      transparent 20%,
+      rgba(0, 0, 0, 0.2) 72%,
+      rgba(0, 0, 0, 0.52) 100%
+    );
+}
+
+@keyframes blend-mesh-drift {
+  0% {
+    transform: translate3d(-3%, -2%, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(2%, 2%, 0) scale(1.07);
+  }
+
+  100% {
+    transform: translate3d(-1%, 4%, 0) scale(1.02);
+  }
+}
+
+@keyframes blend-red-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.92);
+    opacity: 0.32;
+  }
+
+  100% {
+    transform: translate3d(14%, 10%, 0) scale(1.12);
+    opacity: 0.55;
+  }
+}
+
+@keyframes blend-orange-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1.05);
+    opacity: 0.34;
+  }
+
+  100% {
+    transform: translate3d(-13%, 8%, 0) scale(0.94);
+    opacity: 0.52;
+  }
+}
+
+@media (max-width: 768px) {
+  .blend-hero-background__mesh {
+    inset: -20%;
+    filter: blur(55px);
+  }
+
+  .blend-hero-background__glow {
+    width: 105vw;
+    filter: blur(75px);
+  }
+
+  .blend-hero-background__glow--red {
+    left: -48%;
+    top: 12%;
+  }
+
+  .blend-hero-background__glow--orange {
+    right: -48%;
+    top: 15%;
+  }
+
+  .blend-hero-background__orb {
+    width: 95vw;
+  }
+
+  .blend-hero-background__grid {
+    background-size: 48px 48px;
+    opacity: 0.055;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blend-hero-background__mesh,
+  .blend-hero-background__glow {
+    animation: none;
+  }
+}

@@ -1,0 +1,2161 @@
+@import "tailwindcss";
+
+
+
+:root {
+
+  --blend-navy: #0a2540;
+
+  --blend-orange: #ff9f1c;
+
+  --blend-blue: #0066ad;
+
+  --blend-dark: #111111;
+
+  --blend-gray: #333333;
+
+  --blend-white: #ffffff;
+
+  --blend-light: #f5f5f3;
+
+}
+
+
+
+* {
+
+  box-sizing: border-box;
+
+}
+
+
+
+html {
+
+  scroll-behavior: smooth;
+
+}
+
+
+
+body {
+
+  margin: 0;
+
+  background: var(--blend-white);
+
+  color: var(--blend-dark);
+
+  font-family: Arial, Helvetica, sans-serif;
+
+}
+
+
+
+a {
+
+  color: inherit;
+
+  text-decoration: none;
+
+}
+
+
+
+button {
+
+  font: inherit;
+
+}
+
+
+
+::selection {
+
+  background: var(--blend-orange);
+
+  color: var(--blend-navy);
+
+}
+
+
+
+/* ========================================
+
+   BLEND CREATIVE — SHIMMER BUTTON
+
+   ======================================== */
+
+
+
+.blend-shimmer {
+
+  position: relative;
+
+  isolation: isolate;
+
+  overflow: hidden;
+
+  transform: translateZ(0);
+
+  transition:
+
+    transform 300ms ease,
+
+    box-shadow 300ms ease,
+
+    border-color 300ms ease;
+
+}
+
+
+
+/* Reflexo de luz que atravessa o botão */
+
+.blend-shimmer::before {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 0;
+
+  pointer-events: none;
+
+  background: linear-gradient(
+
+    110deg,
+
+    transparent 20%,
+
+    rgba(255, 255, 255, 0.06) 35%,
+
+    rgba(255, 255, 255, 0.48) 50%,
+
+    rgba(255, 159, 28, 0.24) 58%,
+
+    transparent 75%
+
+  );
+
+  transform: translateX(-130%);
+
+  transition: transform 800ms cubic-bezier(0.2, 0.65, 0.3, 1);
+
+}
+
+
+
+/* Mantém o conteúdo acima do brilho */
+
+.blend-shimmer > * {
+
+  position: relative;
+
+  z-index: 1;
+
+}
+
+
+
+.blend-shimmer:hover::before,
+
+.blend-shimmer:focus-visible::before {
+
+  transform: translateX(130%);
+
+}
+
+
+
+.blend-shimmer:hover {
+
+  transform: translateY(-2px);
+
+  box-shadow:
+
+    0 8px 28px rgba(255, 159, 28, 0.18),
+
+    0 0 0 1px rgba(0, 102, 173, 0.28);
+
+}
+
+
+
+.blend-shimmer:active {
+
+  transform: translateY(0) scale(0.985);
+
+}
+
+
+
+.blend-shimmer:focus-visible {
+
+  outline: 2px solid var(--blend-orange);
+
+  outline-offset: 4px;
+
+}
+
+
+
+.blend-shimmer:disabled,
+
+.blend-shimmer[aria-disabled="true"] {
+
+  cursor: not-allowed;
+
+  opacity: 0.6;
+
+  transform: none;
+
+  box-shadow: none;
+
+}
+
+
+
+.blend-shimmer:disabled::before,
+
+.blend-shimmer[aria-disabled="true"]::before {
+
+  display: none;
+
+}
+
+
+
+/* Respeita usuários que preferem menos animação */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .blend-shimmer,
+
+  .blend-shimmer::before {
+
+    transition: none;
+
+  }
+
+
+
+  .blend-shimmer:hover,
+
+  .blend-shimmer:active {
+
+    transform: none;
+
+  }
+
+}
+
+
+
+/* ==========================================
+
+   BLEND CREATIVE — EFEITO SHIMMER GLOBAL
+
+   ========================================== */
+
+
+
+.blend-shimmer {
+
+  position: relative;
+
+  isolation: isolate;
+
+  overflow: hidden;
+
+  transform: translateZ(0);
+
+  transition:
+
+    transform 300ms ease,
+
+    box-shadow 300ms ease,
+
+    background-color 300ms ease;
+
+}
+
+
+
+/* Reflexo luminoso em movimento */
+
+.blend-shimmer::before {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 0;
+
+  pointer-events: none;
+
+  background: linear-gradient(
+
+    110deg,
+
+    transparent 20%,
+
+    rgba(255, 255, 255, 0.08) 35%,
+
+    rgba(255, 255, 255, 0.55) 50%,
+
+    rgba(255, 255, 255, 0.12) 58%,
+
+    transparent 75%
+
+  );
+
+  transform: translateX(-130%);
+
+  transition: transform 800ms cubic-bezier(0.2, 0.65, 0.3, 1);
+
+}
+
+
+
+/* Mantém textos e ícones acima do reflexo */
+
+.blend-shimmer > * {
+
+  position: relative;
+
+  z-index: 1;
+
+}
+
+
+
+/* Movimento ao passar o mouse */
+
+.blend-shimmer:hover::before,
+
+.blend-shimmer:focus-visible::before {
+
+  transform: translateX(130%);
+
+}
+
+
+
+.blend-shimmer:hover {
+
+  transform: translateY(-2px);
+
+  box-shadow:
+
+    0 8px 30px rgba(255, 107, 44, 0.24),
+
+    0 0 24px rgba(255, 107, 44, 0.10);
+
+}
+
+
+
+.blend-shimmer:active {
+
+  transform: translateY(0) scale(0.985);
+
+}
+
+
+
+.blend-shimmer:focus-visible {
+
+  outline: 2px solid #ff9f1c;
+
+  outline-offset: 4px;
+
+}
+
+
+
+/* Botões desabilitados */
+
+.blend-shimmer:disabled,
+
+.blend-shimmer[aria-disabled="true"] {
+
+  cursor: not-allowed;
+
+  opacity: 0.6;
+
+  transform: none;
+
+  box-shadow: none;
+
+}
+
+
+
+.blend-shimmer:disabled::before,
+
+.blend-shimmer[aria-disabled="true"]::before {
+
+  display: none;
+
+}
+
+
+
+/* Respeita a preferência por movimento reduzido */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .blend-shimmer,
+
+  .blend-shimmer::before {
+
+    transition: none;
+
+  }
+
+
+
+  .blend-shimmer:hover,
+
+  .blend-shimmer:active {
+
+    transform: none;
+
+  }
+
+}
+
+
+
+
+
+/* =========================================
+
+   BLEND CREATIVE — HORIZONTAL SERVICES
+
+   ========================================= */
+
+
+
+.blend-services {
+  --services-scroll-distance: 0px;
+
+  position: relative;
+  height: calc(100svh + var(--services-scroll-distance));
+  background: var(--services-background, #0a0a0a);
+  color: #ffffff;
+  transition: none;
+}
+
+
+
+
+
+.blend-services__sticky {
+
+  position: sticky;
+
+  top: 0;
+
+  height: 100vh;
+
+  height: 100svh;
+
+  min-height: 0;
+
+  overflow: hidden;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  padding: clamp(24px, 4vw, 56px) 0 24px;
+
+}
+
+
+
+
+
+.blend-services__intro {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 24px;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .blend-services__intro { padding-inline: 40px; }
+}
+
+@media (min-width: 1024px) {
+  .blend-services__intro { padding-inline: 64px; }
+}
+
+
+
+.blend-services__eyebrow {
+
+  display: block;
+
+  margin-bottom: 22px;
+
+  color: var(--blend-orange);
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.18em;
+
+}
+
+
+
+.blend-services__intro h2 {
+
+  max-width: 1000px;
+
+  margin: 0;
+
+  font-size: clamp(38px, 5.6vw, 82px);
+
+  font-weight: 500;
+
+  letter-spacing: -0.065em;
+
+  line-height: 0.98;
+
+}
+
+
+
+.blend-services__intro h2 span {
+
+  color: rgba(255, 255, 255, 0.54);
+
+}
+
+
+
+.blend-services__intro > p {
+
+  max-width: 470px;
+
+  margin: 20px 0 0;
+
+  color: rgba(255, 255, 255, 0.7);
+
+  font-size: 15px;
+
+  line-height: 1.7;
+
+}
+
+
+
+.blend-services__hint {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  margin-top: 24px;
+
+  color: rgba(255, 255, 255, 0.7);
+
+  font-size: 10px;
+
+  letter-spacing: 0.13em;
+
+}
+
+
+
+.blend-services__hint span {
+
+  color: var(--blend-orange);
+
+  font-size: 18px;
+
+}
+
+
+
+.blend-services__viewport {
+
+  width: 100%;
+
+  margin-top: clamp(28px, 4vh, 48px);
+
+  overflow: hidden;
+
+  flex-shrink: 0;
+
+}
+
+
+
+.blend-services__track {
+  display: flex;
+  align-items: stretch;
+  gap: 20px;
+  width: max-content;
+  padding-left: max(24px, calc((100vw - 1280px) / 2 + 24px));
+  padding-right: 24px;
+  will-change: transform;
+}
+
+@media (min-width: 768px) {
+  .blend-services__track {
+    padding-left: max(40px, calc((100vw - 1280px) / 2 + 40px));
+  }
+}
+
+@media (min-width: 1024px) {
+  .blend-services__track {
+    padding-left: max(64px, calc((100vw - 1280px) / 2 + 64px));
+  }
+}
+
+
+
+.blend-service-card {
+
+  flex: 0 0 clamp(300px, 34vw, 510px);
+
+  min-width: 0;
+
+  color: #ffffff;
+
+}
+
+
+
+.blend-service-card__image {
+
+  position: relative;
+
+  width: 100%;
+
+  height: clamp(190px, 25vh, 300px);
+
+  overflow: hidden;
+
+  border-radius: 5px;
+
+  background-color: #282828;
+
+  background-size: cover;
+
+  background-position: center;
+
+}
+
+
+
+.blend-service-card__category {
+
+  position: absolute;
+
+  left: 18px;
+
+  bottom: 16px;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.15em;
+
+}
+
+
+
+.blend-service-card__content {
+
+  padding-top: 18px;
+
+}
+
+
+
+.blend-service-card__number {
+
+  color: var(--blend-orange);
+
+  font-size: 11px;
+
+  letter-spacing: 0.1em;
+
+}
+
+
+
+.blend-service-card h3 {
+
+  margin: 10px 0;
+
+  font-size: clamp(23px, 2.2vw, 32px);
+
+  font-weight: 500;
+
+  letter-spacing: -0.04em;
+
+}
+
+
+
+.blend-service-card p {
+
+  max-width: 380px;
+
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.7);
+
+  font-size: 13px;
+
+  line-height: 1.65;
+
+}
+
+
+
+.blend-services__footer {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 16px;
+
+  padding: 22px max(24px, calc((100vw - 1280px) / 2 + 24px)) 0;
+
+  margin-top: auto;
+
+  color: rgba(255, 255, 255, 0.55);
+
+  font-size: 9px;
+
+  letter-spacing: 0.12em;
+
+}
+
+
+
+@media (min-width: 768px) {
+  .blend-services__footer {
+    padding-left: max(40px, calc((100vw - 1280px) / 2 + 40px));
+    padding-right: max(40px, calc((100vw - 1280px) / 2 + 40px));
+  }
+}
+
+@media (min-width: 1024px) {
+  .blend-services__footer {
+    padding-left: max(64px, calc((100vw - 1280px) / 2 + 64px));
+    padding-right: max(64px, calc((100vw - 1280px) / 2 + 64px));
+  }
+}
+
+/* Tablet e celular: fluxo vertical, sem seção presa */
+
+@media (max-width: 767px) {
+
+  .blend-services {
+
+    height: auto;
+
+    background: #111111 ;
+
+  }
+
+
+
+  .blend-services__sticky {
+
+    position: relative;
+
+    top: auto;
+
+    height: auto;
+
+    min-height: 0;
+
+    padding: 76px 0 32px;
+
+    overflow: visible;
+
+    display: block;
+
+  }
+
+
+
+  .blend-services__intro h2 {
+
+    font-size: clamp(38px, 10vw, 58px);
+
+  }
+
+
+
+  .blend-services__intro > p {
+
+    font-size: 14px;
+
+  }
+
+
+
+  .blend-services__viewport {
+
+    margin-top: 36px;
+
+    overflow: visible;
+
+  }
+
+
+
+  .blend-services__track {
+
+    width: auto;
+
+    display: grid;
+
+    grid-template-columns: minmax(0, 1fr);
+
+    gap: 36px;
+
+    padding: 0 24px;
+
+    transform: none !important;
+
+  }
+
+
+
+  .blend-service-card {
+
+    width: 100%;
+
+  }
+
+
+
+  .blend-service-card__image {
+
+    height: auto;
+
+    aspect-ratio: 1.2 / 1;
+
+  }
+
+
+
+  .blend-service-card h3 {
+
+    font-size: 28px;
+
+  }
+
+
+
+  .blend-services__footer {
+
+    padding: 36px 24px 0;
+
+    flex-wrap: wrap;
+
+  }
+
+}
+
+
+
+/* Telas baixas: reduz o espaço ocupado pelo cabeçalho */
+
+@media (min-width: 768px) and (max-height: 760px) {
+
+  .blend-services__sticky {
+
+    min-height: 0;
+
+    padding-top: 24px;
+
+    padding-bottom: 16px;
+
+  }
+
+
+
+  .blend-services__intro h2 {
+
+    font-size: clamp(36px, 4vw, 58px);
+
+  }
+
+
+
+  .blend-services__intro > p {
+
+    margin-top: 12px;
+
+  }
+
+
+
+  .blend-services__hint {
+
+    margin-top: 12px;
+
+  }
+
+
+
+  .blend-services__viewport {
+
+    margin-top: 20px;
+
+  }
+
+
+
+  .blend-service-card__image {
+
+    height: 180px;
+
+  }
+
+}
+
+
+
+/* Movimento reduzido: cards em fluxo normal */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .blend-services {
+
+    height: auto;
+
+    background: #111111 !important;
+
+  }
+
+
+
+  .blend-services__sticky {
+
+    position: relative;
+
+    height: auto;
+
+    min-height: 0;
+
+    overflow: visible;
+
+  }
+
+
+
+  .blend-services__viewport {
+
+    overflow: visible;
+
+  }
+
+
+
+  .blend-services__track {
+
+    width: auto;
+
+    display: grid;
+
+    grid-template-columns: minmax(0, 1fr);
+
+    padding: 0 clamp(24px, 7vw, 120px);
+
+    transform: none !important;
+
+  }
+
+
+
+  .blend-service-card {
+
+    width: 100%;
+
+  }
+
+}
+
+
+
+/* =========================================
+
+   QUARTA DOBRA — POSICIONAMENTO BLEND
+
+========================================= */
+
+
+
+.blend-positioning {
+
+  --positioning-orange: #ff9f1c;
+
+  --positioning-navy: #0a2540;
+
+
+
+  position: relative;
+
+  isolation: isolate;
+
+  min-height: 100svh;
+
+  overflow: hidden;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  padding: clamp(24px, 4vw, 64px);
+
+  background: var(--positioning-orange);
+
+  color: var(--positioning-navy);
+
+}
+
+
+
+.blend-positioning__top,
+
+.blend-positioning__signature {
+
+  position: relative;
+
+  z-index: 2;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.13em;
+
+}
+
+
+
+.blend-positioning__content {
+
+  position: relative;
+
+  z-index: 2;
+
+  width: 100%;
+
+  max-width: 1450px;
+
+  margin: auto;
+
+  padding: clamp(72px, 10vh, 120px) 0;
+
+}
+
+
+
+.blend-positioning__eyebrow {
+
+  display: inline-block;
+
+  margin-bottom: clamp(24px, 4vw, 48px);
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.2em;
+
+}
+
+
+
+.blend-positioning__content h2 {
+
+  max-width: 1250px;
+
+  margin: 0;
+
+  font-size: clamp(44px, 8.5vw, 132px);
+
+  font-weight: 750;
+
+  line-height: 0.91;
+
+  letter-spacing: -0.075em;
+
+  text-wrap: balance;
+
+}
+
+
+
+.blend-positioning__outline {
+
+  color: #fff;
+
+}
+
+
+
+.blend-positioning__bottom {
+
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  gap: 32px;
+
+  margin-top: clamp(42px, 7vw, 88px);
+
+}
+
+
+
+.blend-positioning__bottom p {
+
+  max-width: 460px;
+
+  margin: 0;
+
+  font-size: clamp(15px, 1.35vw, 19px);
+
+  font-weight: 500;
+
+  line-height: 1.7;
+
+}
+
+
+
+.blend-positioning__cta {
+
+  position: relative;
+
+  z-index: 2;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 32px;
+
+  min-height: 60px;
+
+  padding: 0 24px;
+
+  border: 1px solid var(--positioning-navy);
+
+  border-radius: 2px;
+
+  background: var(--positioning-navy);
+
+  color: #fff;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  text-decoration: none;
+
+  transition:
+
+    background 250ms ease,
+
+    color 250ms ease,
+
+    transform 250ms ease;
+
+}
+
+
+
+.blend-positioning__arrow {
+
+  font-size: 21px;
+
+  transition: transform 250ms ease;
+
+}
+
+
+
+.blend-positioning__cta:hover {
+
+  background: transparent;
+
+  color: var(--positioning-navy);
+
+  transform: translateY(-3px);
+
+}
+
+
+
+.blend-positioning__cta:hover .blend-positioning__arrow {
+
+  transform: translate(3px, -3px);
+
+}
+
+
+
+.blend-positioning__signature {
+
+  padding-top: 24px;
+
+  border-top: 1px solid rgb(10 37 64 / 25%);
+
+}
+
+
+
+.blend-positioning__orb {
+
+  position: absolute;
+
+  z-index: 0;
+
+  top: 50%;
+
+  right: -12vw;
+
+  width: min(42vw, 650px);
+
+  aspect-ratio: 1;
+
+  border: 1px solid rgb(10 37 64 / 15%);
+
+  border-radius: 50%;
+
+  transform: translateY(-50%);
+
+  pointer-events: none;
+
+}
+
+
+
+.blend-positioning__orb::before,
+
+.blend-positioning__orb::after {
+
+  position: absolute;
+
+  content: "";
+
+  border: 1px solid rgb(10 37 64 / 13%);
+
+  border-radius: 50%;
+
+  inset: 9%;
+
+}
+
+
+
+.blend-positioning__orb::after {
+
+  inset: 19%;
+
+}
+
+
+
+/* TABLETS E CELULARES */
+
+
+
+@media (max-width: 768px) {
+
+  .blend-positioning {
+
+    min-height: 88svh;
+
+    padding: 24px;
+
+  }
+
+
+
+  .blend-positioning__top {
+
+    align-items: flex-start;
+
+    font-size: 8px;
+
+    letter-spacing: 0.08em;
+
+  }
+
+
+
+  .blend-positioning__top span:last-child {
+
+    max-width: 135px;
+
+    text-align: right;
+
+  }
+
+
+
+  .blend-positioning__content {
+
+    padding: 90px 0;
+
+  }
+
+
+
+  .blend-positioning__eyebrow {
+
+    margin-bottom: 28px;
+
+    font-size: 9px;
+
+  }
+
+
+
+  .blend-positioning__content h2 {
+
+    font-size: clamp(43px, 10.5vw, 76px);
+
+    line-height: 0.98;
+
+    letter-spacing: -0.065em;
+
+  }
+
+
+
+  .blend-positioning__bottom {
+
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 28px;
+
+    margin-top: 36px;
+
+  }
+
+
+
+  .blend-positioning__bottom p {
+
+    font-size: 15px;
+
+  }
+
+
+
+  .blend-positioning__desktop-break {
+
+    display: none;
+
+  }
+
+
+
+  .blend-positioning__cta {
+
+    width: 100%;
+
+    min-height: 58px;
+
+  }
+
+
+
+  .blend-positioning__signature {
+
+    gap: 12px;
+
+    font-size: 8px;
+
+    letter-spacing: 0.06em;
+
+  }
+
+
+
+  .blend-positioning__orb {
+
+    top: 35%;
+
+    right: -45%;
+
+    width: 90vw;
+
+  }
+
+}
+
+
+
+@media (prefers-reduced-motion: reduce) {
+
+  .blend-positioning__cta,
+
+  .blend-positioning__arrow {
+
+    transition: none;
+
+  }
+
+}
+
+
+
+/* QUARTA DOBRA — FAIXA LARANJA */
+
+
+
+.blend-positioning {
+  width: 100%;
+  padding-block: clamp(48px, 7vw, 96px);
+  background: #ff9f1c;
+  color: #0a2540;
+}
+
+
+
+.blend-positioning__label {
+
+  margin: 0 0 24px;
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.12em;
+
+}
+
+
+
+.blend-positioning h2 {
+
+  max-width: 1200px;
+
+  margin: 0;
+
+  font: inherit;
+
+  font-size: clamp(32px, 5vw, 72px);
+
+  font-weight: 600;
+
+  line-height: 1.05;
+
+  letter-spacing: inherit;
+
+}
+
+
+
+.blend-positioning h2 span {
+
+  color: #ffffff;
+
+}
+
+
+
+.blend-positioning__description {
+
+  max-width: 560px;
+
+  margin: 28px 0 0;
+
+  font-size: 15px;
+
+  font-weight: 400;
+
+  line-height: 1.7;
+
+}
+
+
+
+@media (max-width: 640px) {
+
+  .blend-positioning h2 {
+
+    font-size: clamp(30px, 8vw, 44px);
+
+  }
+
+
+
+  .blend-positioning h2 br {
+
+    display: none;
+
+  }
+
+}
+
+
+
+/* PROVA SOCIAL — PRIMEIRA DOBRA */
+
+
+
+.blend-social-proof {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  width: fit-content;
+
+  max-width: 100%;
+
+  font-family: inherit;
+
+}
+
+
+
+.blend-social-proof__avatars {
+
+  display: flex;
+
+  align-items: center;
+
+  flex-shrink: 0;
+
+  padding-left: 2px;
+
+}
+
+
+
+.blend-social-proof__avatars img,
+
+.blend-social-proof__count {
+
+  position: relative;
+
+  width: 42px;
+
+  height: 42px;
+
+  margin-left: -7px;
+
+  border: 2px solid #0a2540;
+
+  border-radius: 50%;
+
+  object-fit: cover;
+
+}
+
+
+
+.blend-social-proof__avatars img:first-child {
+
+  margin-left: 0;
+
+}
+
+
+
+.blend-social-proof__count {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: #ff9f1c;
+
+  color: #0a2540;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+}
+
+
+
+.blend-social-proof__info {
+
+  min-width: 0;
+
+}
+
+
+
+.blend-social-proof__stars {
+
+  margin-bottom: 3px;
+
+  color: #ff9f1c;
+
+  font-size: 15px;
+
+  line-height: 1;
+
+  letter-spacing: 2px;
+
+}
+
+
+
+.blend-social-proof__info p {
+
+  margin: 0;
+
+  color: inherit;
+
+  font: inherit;
+
+  font-size: 12px;
+
+  font-weight: 500;
+
+  line-height: 1.5;
+
+}
+
+
+
+@media (max-width: 480px) {
+
+  .blend-social-proof {
+
+    gap: 10px;
+
+  }
+
+
+
+  .blend-social-proof__avatars img,
+
+  .blend-social-proof__count {
+
+    width: 36px;
+
+    height: 36px;
+
+  }
+
+
+
+  .blend-social-proof__info p {
+
+    font-size: 11px;
+
+  }
+
+}
+
+
+
+.blend-social-proof__info p {
+
+  margin: 0;
+
+  color: inherit;
+
+  font: inherit;
+
+  font-size: 11px;
+
+  font-weight: 500;
+
+  line-height: 1.35;
+
+  text-align: left;
+
+}
+
+
+
+
+
+
+
+/* =========================================
+
+   BLEND — REVEAL MOTION
+
+   Entradas suaves ao rolar a página
+
+========================================= */
+
+
+
+html.blend-motion-ready [data-reveal] {
+
+  opacity: 0;
+
+  transform: translate3d(0, 24px, 0);
+
+  transition:
+
+    opacity 800ms cubic-bezier(0.22, 1, 0.36, 1),
+
+    transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
+
+  transition-delay: var(--reveal-delay, 0ms);
+
+  will-change: opacity, transform;
+
+}
+
+
+
+html.blend-motion-ready [data-reveal="left"] {
+
+  transform: translate3d(-28px, 0, 0);
+
+}
+
+
+
+html.blend-motion-ready [data-reveal="right"] {
+
+  transform: translate3d(28px, 0, 0);
+
+}
+
+
+
+html.blend-motion-ready [data-reveal].is-revealed {
+
+  opacity: 1;
+
+  transform: translate3d(0, 0, 0);
+
+  will-change: auto;
+
+}
+
+
+
+/* Microinterações dos cards de serviços */
+
+.blend-service-card {
+
+  transition:
+
+    opacity 350ms ease,
+
+    filter 350ms ease;
+
+}
+
+
+
+.blend-service-card__image {
+
+  transition:
+
+    filter 350ms ease,
+
+    border-radius 350ms ease;
+
+}
+
+
+
+@media (hover: hover) and (pointer: fine) {
+
+  .blend-service-card:hover .blend-service-card__image {
+
+    filter: brightness(1.12);
+
+  }
+
+
+
+  .blend-service-card:hover h3 {
+
+    color: #ff9f1c;
+
+    transition: color 300ms ease;
+
+  }
+
+}
+
+
+
+/* A faixa laranja continua estática; somente o texto entra */
+
+.blend-positioning [data-reveal] {
+
+  transition-duration: 750ms;
+
+}
+
+
+
+/* Acessibilidade */
+
+@media (prefers-reduced-motion: reduce) {
+
+  html.blend-motion-ready [data-reveal],
+
+  html.blend-motion-ready [data-reveal="left"],
+
+  html.blend-motion-ready [data-reveal="right"] {
+
+    opacity: 1;
+
+    transform: none;
+
+    transition: none;
+
+    will-change: auto;
+
+  }
+
+
+
+  .blend-service-card,
+
+  .blend-service-card__image,
+
+  .blend-service-card h3 {
+
+    transition: none;
+
+  }
+
+}
+
+
+/* =====================================================
+   ALINHAMENTO CONSISTENTE — DOBRAS 3, 4 E 6
+   Referência: max-w-7xl px-6 md:px-10 lg:px-16
+   ===================================================== */
+
+/* Terceira dobra: o início dos cards e os textos seguem o mesmo eixo
+   horizontal usado pelas demais seções da página. */
+.blend-services__intro {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 24px;
+  flex-shrink: 0;
+}
+
+.blend-services__track {
+  display: flex;
+  align-items: stretch;
+  gap: 20px;
+  width: max-content;
+  padding-left: 24px;
+  padding-right: 24px;
+  will-change: transform;
+}
+
+.blend-services__footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 24px 0;
+  margin-top: auto;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+}
+
+/* Quarta dobra: a faixa laranja ocupa a tela toda; o conteúdo é alinhado
+   pelo contêiner max-w-7xl presente no page.tsx. */
+.blend-positioning {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-height: 0;
+  overflow: hidden;
+  padding-block: clamp(48px, 7vw, 96px);
+  padding-inline: 0;
+  background: #ff9f1c;
+  color: #0a2540;
+}
+
+.blend-positioning__label {
+  margin: 0 0 24px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+.blend-positioning h2 {
+  max-width: 1200px;
+  margin: 0;
+  font: inherit;
+  font-size: clamp(32px, 5vw, 72px);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: inherit;
+}
+
+.blend-positioning h2 span {
+  color: #ffffff;
+}
+
+.blend-positioning__description {
+  max-width: 560px;
+  margin: 28px 0 0;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+/* Tablet: px-10 equivale a 40px nas demais dobras. */
+@media (min-width: 768px) {
+  .blend-services__intro {
+    padding-inline: 40px;
+  }
+
+  .blend-services__track {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .blend-services__footer {
+    padding-inline: 40px;
+  }
+}
+
+/* Desktop: px-16 equivale a 64px nas demais dobras. */
+@media (min-width: 1024px) {
+  .blend-services__intro {
+    padding-inline: 64px;
+  }
+
+  .blend-services__track {
+    padding-left: 64px;
+    padding-right: 64px;
+  }
+
+  .blend-services__footer {
+    padding-inline: 64px;
+  }
+}
+
+/* Em telas maiores que o contêiner max-w-7xl, acompanhe também a margem
+   externa do contêiner centralizado, em vez de deixar o conteúdo deslocado. */
+@media (min-width: 1280px) {
+  .blend-services__track {
+    padding-left: calc((100vw - 1280px) / 2 + 64px);
+    padding-right: calc((100vw - 1280px) / 2 + 64px);
+  }
+
+  .blend-services__footer {
+    padding-left: calc((100vw - 1280px) / 2 + 64px);
+    padding-right: calc((100vw - 1280px) / 2 + 64px);
+  }
+}
+
+@media (max-width: 767px) {
+  .blend-services__intro {
+    padding-inline: 24px;
+  }
+
+  .blend-services__track {
+    padding: 0 24px;
+  }
+
+  .blend-services__footer {
+    padding: 36px 24px 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .blend-positioning h2 {
+    font-size: clamp(30px, 8vw, 44px);
+  }
+
+  .blend-positioning h2 br {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blend-positioning [data-reveal] {
+    transition: none;
+  }
+}
+
+
+/* =====================================================
+   BLEND — ROLAGEM HORIZONTAL RESPONSIVA
+   Mantém o desktop inalterado.
+   A rolagem vertical controla os cards no mobile.
+   ===================================================== */
+
+@media (max-width: 767px) and (prefers-reduced-motion: no-preference) {
+  .blend-services {
+    height: calc(100svh + var(--services-scroll-distance));
+    min-height: 0;
+    background: var(--services-background, #111111);
+  }
+
+  .blend-services__sticky {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    min-height: 0;
+    padding: 22px 0 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .blend-services__intro {
+    width: 100%;
+    flex: 0 0 auto;
+    padding-inline: 24px;
+  }
+
+  .blend-services__eyebrow {
+    margin-bottom: 12px;
+    font-size: 10px;
+  }
+
+  .blend-services__intro h2 {
+    font-size: clamp(34px, 8.5vw, 46px);
+    line-height: 0.98;
+    letter-spacing: -0.055em;
+  }
+
+  .blend-services__intro > p {
+    max-width: 390px;
+    margin-top: 12px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .blend-services__hint {
+    margin-top: 12px;
+    gap: 8px;
+    font-size: 9px;
+  }
+
+  .blend-services__viewport {
+    width: 100%;
+    flex: 0 0 auto;
+    margin-top: clamp(16px, 2.5svh, 24px);
+    overflow: hidden;
+  }
+
+  .blend-services__track {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 16px;
+    width: max-content;
+    padding: 0 24px;
+    will-change: transform;
+  }
+
+  .blend-service-card {
+    flex: 0 0 min(82vw, 360px);
+    width: auto;
+    min-width: 0;
+  }
+
+  .blend-service-card__image {
+    width: 100%;
+    height: clamp(135px, 22svh, 180px);
+    aspect-ratio: auto;
+    border-radius: 5px;
+  }
+
+  .blend-service-card__category {
+    left: 14px;
+    bottom: 12px;
+    font-size: 9px;
+  }
+
+  .blend-service-card__content {
+    padding-top: 12px;
+  }
+
+  .blend-service-card__number {
+    font-size: 10px;
+  }
+
+  .blend-service-card h3 {
+    margin: 7px 0;
+    font-size: clamp(22px, 6vw, 27px);
+  }
+
+  .blend-service-card p {
+    max-width: 340px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .blend-services__footer {
+    flex: 0 0 auto;
+    width: 100%;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 14px 24px 0;
+    margin-top: auto;
+    font-size: 8px;
+    letter-spacing: 0.08em;
+  }
+}
+
+/* Até 430px (iPhone 14 Pro Max em retrato): libera o deslocamento
+   calculado pela rolagem vertical, sobrepondo o reset mobile legado. */
+@media (max-width: 430px) and (prefers-reduced-motion: no-preference) {
+  .blend-services__track {
+    transform: translate3d(calc(-1 * var(--services-horizontal-offset, 0px)), 0, 0) !important;
+  }
+}

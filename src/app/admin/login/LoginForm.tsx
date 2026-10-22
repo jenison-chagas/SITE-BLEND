@@ -94,7 +94,7 @@ export default function LoginForm() {
       <button
         type="submit"
         disabled={loading}
-        className="w-full rounded-xl bg-[#ff9f1c] px-4 py-3 font-semibold text-[#050607] transition hover:bg-[#ffb347] disabled:cursor-not-allowed disabled:opacity-60"
+        className="w-full rounded-xl bg-[#ff9f1c] px-4 py-3 font-semibold text-black transition hover:bg-[#ff9f1c] disabled:cursor-not-allowed disabled:opacity-60 blend-orange-button"
       >
         {loading ? "Entrando..." : "Acessar painel"}
       </button>

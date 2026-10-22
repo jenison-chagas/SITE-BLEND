@@ -1,6 +1,6 @@
 .cinematic-loader {
-  --loader-orange: #ff6a00;
-  --loader-amber: #ff9d42;
+  --loader-orange: #ff9f1c;
+  --loader-amber: #ff9f1c;
 
   position: fixed;
   inset: 0;
@@ -35,13 +35,13 @@
   background:
     radial-gradient(
       ellipse at 50% 45%,
-      rgba(255, 94, 0, 0.12) 0%,
-      rgba(255, 94, 0, 0.035) 24%,
+      rgba(255,159,28, 0.12) 0%,
+      rgba(255,159,28, 0.035) 24%,
       transparent 55%
     ),
     radial-gradient(
       ellipse at 50% 100%,
-      rgba(255, 106, 0, 0.08) 0%,
+      rgba(255,159,28, 0.08) 0%,
       transparent 45%
     ),
     #050505;
@@ -66,8 +66,8 @@
   left: -22%;
   background: radial-gradient(
     circle,
-    rgba(255, 82, 0, 0.2) 0%,
-    rgba(255, 82, 0, 0.035) 42%,
+    rgba(255,159,28, 0.2) 0%,
+    rgba(255,159,28, 0.035) 42%,
     transparent 70%
   );
 }
@@ -77,8 +77,8 @@
   bottom: -42%;
   background: radial-gradient(
     circle,
-    rgba(255, 123, 24, 0.16) 0%,
-    rgba(255, 123, 24, 0.025) 45%,
+    rgba(255,159,28, 0.16) 0%,
+    rgba(255,159,28, 0.025) 45%,
     transparent 70%
   );
   animation-delay: 0.4s, 0.4s;
@@ -91,7 +91,7 @@
   height: 30vw;
   background: radial-gradient(
     circle,
-    rgba(255, 106, 0, 0.09) 0%,
+    rgba(255,159,28, 0.09) 0%,
     transparent 70%
   );
   filter: blur(85px);
@@ -160,7 +160,7 @@
   max-width: min(220px, 58vw);
   max-height: 100px;
   object-fit: contain;
-  filter: drop-shadow(0 0 22px rgba(255, 106, 0, 0.12));
+  filter: drop-shadow(0 0 22px rgba(255,159,28, 0.12));
   animation: cinematic-logo-glow 3s ease-in-out infinite alternate;
 }
 
@@ -180,7 +180,7 @@
   height: 2px;
   margin-top: 30px;
   overflow: hidden;
-  background: rgba(255, 106, 0, 0.2);
+  background: rgba(255,159,28, 0.2);
 }
 
 .cinematic-loader__divider span {
@@ -224,11 +224,11 @@
   height: 100%;
   background: linear-gradient(
     90deg,
-    #d94a00 0%,
+    #ff9f1c 0%,
     var(--loader-orange) 60%,
-    #ffc078 100%
+    #ff9f1c 100%
   );
-  box-shadow: 0 0 14px rgba(255, 106, 0, 0.75);
+  box-shadow: 0 0 14px rgba(255,159,28, 0.75);
   transition: width 0.12s linear;
 }
 
@@ -238,7 +238,7 @@
   right: 0;
   width: 45px;
   height: 8px;
-  background: rgba(255, 220, 180, 0.8);
+  background: rgba(255,159,28, 0.8);
   filter: blur(7px);
   content: "";
 }
@@ -329,11 +329,11 @@
 
 @keyframes cinematic-logo-glow {
   from {
-    filter: drop-shadow(0 0 10px rgba(255, 106, 0, 0.06));
+    filter: drop-shadow(0 0 10px rgba(255,159,28, 0.06));
   }
 
   to {
-    filter: drop-shadow(0 0 24px rgba(255, 106, 0, 0.2));
+    filter: drop-shadow(0 0 24px rgba(255,159,28, 0.2));
   }
 }
 

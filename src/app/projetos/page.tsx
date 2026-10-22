@@ -1,7 +1,7 @@
+import { localProjects } from "@/lib/local-projects";
 
 import type { Metadata } from "next";
 import Link from "next/link";
-import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
   title: "Projetos | Blend Creative Design Studio",
@@ -11,30 +11,8 @@ export const metadata: Metadata = {
 
 export const revalidate = 60;
 
-type Project = {
-  id: string | number;
-  title: string;
-  slug: string;
-  cover_image: string | null;
-  category: string | null;
-  description: string | null;
-  created_at: string;
-};
-
 export default async function ProjetosPage() {
-  const supabase = await createClient();
-
-  const { data, error } = await supabase
-    .from("projects")
-    .select("*")
-    .eq("published", true)
-    .order("created_at", { ascending: false });
-
-  if (error) {
-    console.error("Erro ao carregar projetos:", error.message);
-  }
-
-  const projects = (data ?? []) as Project[];
+  const projects = localProjects.filter((project) => project.published);
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#050607] text-white">
@@ -70,7 +48,7 @@ export default async function ProjetosPage() {
           className="absolute -right-48 top-[480px] h-[480px] w-[480px] rounded-full blur-[150px]"
           style={{
             background:
-              "radial-gradient(circle, rgba(255,107,44,0.12), transparent 70%)",
+              "radial-gradient(circle, rgba(255,159,28,0.12), transparent 70%)",
           }}
         />
 
@@ -78,7 +56,7 @@ export default async function ProjetosPage() {
           className="absolute bottom-[-300px] left-1/2 h-[420px] w-[130%] -translate-x-1/2 rounded-[50%] blur-[100px]"
           style={{
             background:
-              "radial-gradient(ellipse at center, rgba(255,107,44,0.13), transparent 70%)",
+              "radial-gradient(ellipse at center, rgba(255,159,28,0.13), transparent 70%)",
           }}
         />
       </div>
@@ -88,7 +66,7 @@ export default async function ProjetosPage() {
         {/* Cabeçalho editorial */}
         <header className="relative border-b border-white/[0.09] pb-10 sm:pb-12">
           <div className="mb-6 flex items-center gap-3">
-            <span className="h-2 w-2 rounded-full bg-[#ff6b2c] shadow-[0_0_12px_rgba(255,107,44,0.6)]" />
+            <span className="h-2 w-2 rounded-full bg-[#ff9f1c] shadow-[0_0_12px_rgba(255,159,28,0.6)]" />
 
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/55">
               Blend Creative Design Studio
@@ -97,14 +75,14 @@ export default async function ProjetosPage() {
             <span className="h-px max-w-24 flex-1 bg-gradient-to-r from-white/15 to-transparent" />
           </div>
 
-          <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
+          <div className="grid gap-8">
             <div>
               <h1 className="max-w-4xl text-4xl font-medium leading-[1.04] tracking-[-0.055em] sm:text-5xl md:text-6xl lg:text-7xl">
                 Ideias que ganham{" "}
                 <span
-                  className="bg-gradient-to-r from-[#ffc27c] via-[#ff7a32] to-[#ff9f1c] bg-clip-text text-transparent"
+                  className="bg-gradient-to-r from-[#ff9f1c] via-[#ff9f1c] to-[#ff9f1c] bg-clip-text text-transparent"
                   style={{
-                    filter: "drop-shadow(0 0 24px rgba(255,107,44,0.12))",
+                    filter: "drop-shadow(0 0 24px rgba(255,159,28,0.12))",
                   }}
                 >
                   forma e presença.
@@ -117,21 +95,7 @@ export default async function ProjetosPage() {
               </p>
             </div>
 
-            <div className="flex items-end gap-4 md:gap-5">
-              <div>
-                <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/40">
-                  Portfólio
-                </p>
 
-                <p className="mt-2 text-4xl font-medium tracking-tight sm:text-5xl">
-                  {String(projects.length).padStart(2, "0")}
-                </p>
-              </div>
-
-              <p className="mb-1 max-w-24 text-xs leading-5 text-white/40">
-                projetos publicados
-              </p>
-            </div>
           </div>
         </header>
 
@@ -164,7 +128,7 @@ export default async function ProjetosPage() {
                   className="group min-w-0"
                 >
                   {/* Capa */}
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-white/[0.10] bg-[#0d1016] transition-all duration-500 group-hover:-translate-y-1 group-hover:border-[#ff6b2c]/55 group-hover:shadow-[0_18px_55px_rgba(255,107,44,0.08)]">
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-white/[0.10] bg-[#0d1016] transition-all duration-500 group-hover:-translate-y-1 group-hover:border-[#ff9f1c]/55 group-hover:shadow-[0_18px_55px_rgba(255,159,28,0.08)]">
                     {project.cover_image ? (
                       <img
                         src={project.cover_image}
@@ -185,16 +149,8 @@ export default async function ProjetosPage() {
 
                     <div
                       aria-hidden="true"
-                      className="pointer-events-none absolute -bottom-16 left-1/2 h-28 w-3/4 -translate-x-1/2 rounded-full bg-[#ff6b2c]/0 blur-[55px] transition-colors duration-500 group-hover:bg-[#ff6b2c]/20"
+                      className="pointer-events-none absolute -bottom-16 left-1/2 h-28 w-3/4 -translate-x-1/2 rounded-full bg-[#ff9f1c]/0 blur-[55px] transition-colors duration-500 group-hover:bg-[#ff9f1c]/20"
                     />
-
-                    <span className="absolute left-3 top-3 flex h-8 min-w-8 items-center justify-center rounded-full border border-white/15 bg-black/45 px-2 text-[10px] font-medium text-white/80 backdrop-blur-md">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-
-                    <span className="absolute bottom-3 right-3 flex h-9 w-9 translate-y-1 items-center justify-center rounded-full border border-white/20 bg-black/40 text-lg text-white opacity-0 backdrop-blur-md transition-all duration-300 group-hover:translate-y-0 group-hover:border-[#ff9f1c]/60 group-hover:opacity-100">
-                      ↗
-                    </span>
                   </div>
 
                   {/* Informações */}
@@ -214,13 +170,6 @@ export default async function ProjetosPage() {
                         </p>
                       )}
                     </div>
-
-                    <span
-                      aria-hidden="true"
-                      className="mt-5 shrink-0 text-lg text-white/30 transition-all duration-300 group-hover:translate-x-1 group-hover:text-[#ff9f1c]"
-                    >
-                      ↗
-                    </span>
                   </div>
                 </Link>
               ))}

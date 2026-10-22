@@ -10,8 +10,9 @@ const services = [
     category: "BRANDING",
     description:
       "Marcas com personalidade, consistência e uma presença visual que conecta.",
-    image:
-      "linear-gradient(135deg, #24364a 0%, #0a2540 55%, #ff9f1c 160%)",
+    image: "/images/servicos/identidade-visual-1280.webp",
+    imageSmall: "/images/servicos/identidade-visual-640.webp",
+    imageAlt: "Papelaria e estudos geométricos de identidade visual em azul e laranja",
   },
   {
     number: "02",
@@ -19,8 +20,9 @@ const services = [
     category: "CONTEÚDO DIGITAL",
     description:
       "Conteúdo estratégico que transforma ideias em comunicação relevante.",
-    image:
-      "linear-gradient(135deg, #493023 0%, #a74e21 55%, #ff9f1c 120%)",
+    image: "/images/servicos/social-media-1280.webp",
+    imageSmall: "/images/servicos/social-media-640.webp",
+    imageAlt: "Composição publicitária com criadora, smartphone e peças para redes sociais",
   },
   {
     number: "03",
@@ -28,8 +30,9 @@ const services = [
     category: "EXPERIÊNCIAS DIGITAIS",
     description:
       "Sites e landing pages que unem estética, experiência e objetivos de negócio.",
-    image:
-      "linear-gradient(135deg, #152d3e 0%, #0066ad 65%, #78b8e8 140%)",
+    image: "/images/servicos/web-digital-1280.webp",
+    imageSmall: "/images/servicos/web-digital-640.webp",
+    imageAlt: "Layouts digitais apresentados em monitor e smartphone",
   },
   {
     number: "04",
@@ -37,8 +40,9 @@ const services = [
     category: "DIREÇÃO CRIATIVA",
     description:
       "Conceitos visuais e campanhas desenvolvidos para destacar sua marca.",
-    image:
-      "linear-gradient(135deg, #342b24 0%, #6b4b32 60%, #ff9f1c 145%)",
+    image: "/images/servicos/design-campanhas-1280.webp",
+    imageSmall: "/images/servicos/design-campanhas-640.webp",
+    imageAlt: "Composição de campanha com retrato, peças gráficas, megafone e alvo",
   },
   {
     number: "05",
@@ -46,8 +50,9 @@ const services = [
     category: "IMAGEM EM MOVIMENTO",
     description:
       "Produções visuais que contam histórias e aproximam marcas de pessoas.",
-    image:
-      "linear-gradient(135deg, #202020 0%, #424242 60%, #a65d24 145%)",
+    image: "/images/servicos/audiovisual-1280.webp",
+    imageSmall: "/images/servicos/audiovisual-640.webp",
+    imageAlt: "Câmera de cinema, claquete e monitor em composição audiovisual",
   },
   {
     number: "06",
@@ -55,8 +60,9 @@ const services = [
     category: "DESIGN IMPRESSO",
     description:
       "Materiais impressos e comerciais que levam a identidade da marca ao mundo real.",
-    image:
-      "linear-gradient(135deg, #242c35 0%, #35495b 60%, #ff9f1c 150%)",
+    image: "/images/servicos/materiais-graficos-1280.webp",
+    imageSmall: "/images/servicos/materiais-graficos-640.webp",
+    imageAlt: "Catálogo, folheto e cartões com composição gráfica em azul e laranja",
   },
 ];
 
@@ -67,6 +73,7 @@ export default function BlendServicesScroll() {
 
   const [progress, setProgress] = useState(0);
   const [scrollDistance, setScrollDistance] = useState(0);
+  const [entryDistance, setEntryDistance] = useState(0);
   const [reducedMotion, setReducedMotion] = useState(false);
 
   const measure = useCallback(() => {
@@ -80,6 +87,13 @@ export default function BlendServicesScroll() {
       Math.ceil(track.scrollWidth - viewport.clientWidth)
     );
 
+    // Tablets até Full HD: apresenta a dobra inteira antes dos cards moverem.
+    const waitsForEntry = window.matchMedia(
+      "(min-width: 768px) and (max-width: 1920px)"
+    ).matches;
+    setEntryDistance(
+      waitsForEntry ? Math.round(Math.min(140, Math.max(80, window.innerHeight * 0.12))) : 0
+    );
     setScrollDistance((previous) =>
       previous === distance ? previous : distance
     );
@@ -151,7 +165,7 @@ export default function BlendServicesScroll() {
         const sectionTop =
           section.getBoundingClientRect().top + window.scrollY;
 
-        const traveled = window.scrollY - sectionTop;
+        const traveled = window.scrollY - sectionTop - entryDistance;
         const nextProgress = Math.max(
           0,
           Math.min(1, traveled / scrollDistance)
@@ -177,7 +191,7 @@ export default function BlendServicesScroll() {
       window.removeEventListener("scroll", updateProgress);
       window.removeEventListener("resize", updateProgress);
     };
-  }, [reducedMotion, scrollDistance]);
+  }, [reducedMotion, scrollDistance, entryDistance]);
 
   const horizontalOffset = Math.min(
     scrollDistance,
@@ -188,10 +202,6 @@ export default function BlendServicesScroll() {
   const lightness = 10 + backgroundProgress * 42;
   const backgroundColor = `rgb(${lightness}, ${lightness}, ${lightness})`;
 
-  const activeCard = Math.min(
-    6,
-    Math.max(1, Math.floor(progress * 6) + 1)
-  );
 
   return (
     <section
@@ -204,6 +214,7 @@ export default function BlendServicesScroll() {
           "--services-scroll-distance": `${
             reducedMotion ? 0 : scrollDistance
           }px`,
+          "--services-entry-distance": `${reducedMotion ? 0 : entryDistance}px`,
           "--services-background": backgroundColor,
           "--services-horizontal-offset": `${horizontalOffset}px`,
         } as React.CSSProperties
@@ -251,19 +262,21 @@ export default function BlendServicesScroll() {
                 className="blend-service-card"
                 key={service.number}
               >
-                <div
-                  className="blend-service-card__image"
-                  style={{ background: service.image }}
-                >
-                  <span className="blend-service-card__category">
-                    {service.category}
-                  </span>
+                <div className="blend-service-card__image">
+                  <img
+                    className="blend-service-card__art"
+                    src={service.image}
+                    srcSet={`${service.imageSmall} 640w, ${service.image} 1280w`}
+                    sizes="(max-width: 767px) 82vw, (max-width: 1500px) 34vw, 510px"
+                    alt={service.imageAlt}
+                    width={1280}
+                    height={801}
+                    loading="eager"
+                    decoding="async"
+                  />
                 </div>
 
                 <div className="blend-service-card__content">
-                  <span className="blend-service-card__number">
-                    / {service.number}
-                  </span>
 
                   <h3>{service.title}</h3>
                   <p>{service.description}</p>
@@ -275,7 +288,6 @@ export default function BlendServicesScroll() {
 
         <div className="blend-services__footer">
           <span>BLEND CREATIVE DESIGN STUDIO</span>
-          <span>{String(activeCard).padStart(2, "0")} / 06</span>
         </div>
       </div>
     </section>

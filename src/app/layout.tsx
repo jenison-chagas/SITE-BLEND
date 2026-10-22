@@ -1,3 +1,4 @@
+import BlendCursor from "@/components/BlendCursor";
 import CinematicLoader from "@/components/CinematicLoader";
 import type { Metadata } from "next";
 import "./globals.css";
@@ -25,6 +26,7 @@ export default function RootLayout({
     minDuration={5400}
   />
 
+  <BlendCursor />
   {children}
 </body>
     </html>

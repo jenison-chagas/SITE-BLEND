@@ -14,39 +14,40 @@ export default function HomePage() {
         id="blend-hero"
         className="relative min-h-[100svh] overflow-hidden"
       >
-        {/* Grid de fundo */}
-        <div
-          className="pointer-events-none absolute inset-0 z-0 opacity-[0.055]"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(255,255,255,0.35) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255,255,255,0.25) 1px, transparent 1px)
-            `,
-            backgroundSize: "52px 52px",
-            maskImage:
-              "linear-gradient(to bottom, black 0%, black 55%, transparent 100%)",
-            WebkitMaskImage:
-              "linear-gradient(to bottom, black 0%, black 55%, transparent 100%)",
-          }}
-        />
-
-        {/* Luz azul — iluminação ambiente responsiva */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute left-1/2 top-[38%] z-0 h-[clamp(260px,42vw,500px)] w-[min(115vw,850px)] -translate-x-1/2 rounded-full blur-[clamp(80px,12vw,150px)]"
-          style={{
-            background:
-              "radial-gradient(ellipse at center, rgba(0,102,173,0.20) 0%, rgba(0,102,173,0.07) 38%, transparent 72%)",
-          }}
-        />
-
+        {/* Fundo exclusivo do hero: grade âmbar e luz fluida nas bordas. */}
+        <div className="blend-hero-art" aria-hidden="true">
+          <div className="blend-hero-art__grid" />
+          <svg className="blend-hero-art__light" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" fill="none">
+            <defs>
+              <linearGradient id="blend-hero-ribbon" x1="180" y1="80" x2="1230" y2="850" gradientUnits="userSpaceOnUse">
+                <stop stopColor="#ff9f1c" stopOpacity="0" />
+                <stop offset="0.35" stopColor="#ff9f1c" stopOpacity="0.65" />
+                <stop offset="0.64" stopColor="#ff9f1c" />
+                <stop offset="1" stopColor="#ff9f1c" stopOpacity="0" />
+              </linearGradient>
+              <filter id="blend-hero-bloom" x="-100%" y="-100%" width="300%" height="300%">
+                <feGaussianBlur stdDeviation="24" />
+              </filter>
+              <filter id="blend-hero-soft" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="2.5" />
+              </filter>
+              <path id="blend-hero-wave" d="M 120 -120 C 420 70 -105 245 160 450 S 370 710 120 1020 M 1370 -100 C 1020 100 1480 220 1220 440 S 1080 680 1400 980" />
+            </defs>
+            <use href="#blend-hero-wave" stroke="url(#blend-hero-ribbon)" strokeWidth="64" opacity="0.28" filter="url(#blend-hero-bloom)" />
+            <use href="#blend-hero-wave" stroke="url(#blend-hero-ribbon)" strokeWidth="2" opacity="0.4" filter="url(#blend-hero-soft)" />
+          </svg>
+          <span className="blend-hero-art__spark blend-hero-art__spark--one" />
+          <span className="blend-hero-art__spark blend-hero-art__spark--two" />
+          <span className="blend-hero-art__spark blend-hero-art__spark--three" />
+          <div className="blend-hero-art__shade" />
+        </div>
         {/* Horizonte de luz */}
         <div className="pointer-events-none absolute bottom-[-360px] left-1/2 z-0 h-[520px] w-[180vw] -translate-x-1/2">
           <div
             className="absolute left-1/2 top-0 h-[430px] w-[75%] -translate-x-1/2 rounded-[50%] blur-[110px]"
             style={{
               background:
-                "radial-gradient(ellipse at center, rgba(255,88,25,0.30) 0%, rgba(255,88,25,0.14) 30%, rgba(255,88,25,0.03) 55%, transparent 75%)",
+                "radial-gradient(ellipse at center, rgba(255,159,28,0.30) 0%, rgba(255,159,28,0.14) 30%, rgba(255,159,28,0.03) 55%, transparent 75%)",
             }}
           />
 
@@ -61,11 +62,11 @@ export default function HomePage() {
           <div
             className="absolute left-1/2 top-[65px] h-[440px] w-[82%] -translate-x-1/2 rounded-[50%]"
             style={{
-              borderTop: "2px solid rgba(255,105,45,0.60)",
+              borderTop: "2px solid rgba(255,159,28,0.60)",
               boxShadow: `
-                0 -2px 8px rgba(255,105,45,0.35),
-                0 -8px 25px rgba(255,105,45,0.18),
-                0 -20px 60px rgba(255,105,45,0.08)
+                0 -2px 8px rgba(255,159,28,0.35),
+                0 -8px 25px rgba(255,159,28,0.18),
+                0 -20px 60px rgba(255,159,28,0.08)
               `,
             }}
           />
@@ -73,20 +74,11 @@ export default function HomePage() {
           <div
             className="absolute left-1/2 top-[79px] h-[400px] w-[74%] -translate-x-1/2 rounded-[50%]"
             style={{
-              borderTop: "1px solid rgba(255,190,140,0.16)",
+              borderTop: "1px solid rgba(255,159,28,0.16)",
               filter: "blur(1px)",
             }}
           />
         </div>
-
-        {/* Vinheta */}
-        <div
-          className="pointer-events-none absolute inset-0 z-[1]"
-          style={{
-            background:
-              "radial-gradient(ellipse at center, transparent 25%, rgba(0,0,0,0.20) 65%, rgba(0,0,0,0.72) 100%)",
-          }}
-        />
 
         {/* Cabeçalho */}
         <header className="relative z-30">
@@ -130,7 +122,7 @@ export default function HomePage() {
 
               <a
                 href="#contato"
-                className="blend-shimmer rounded-full bg-[#ff6b2c] px-6 py-3 text-sm font-bold text-white shadow-[0_0_30px_rgba(255,107,44,0.18)] transition duration-300 hover:scale-[1.03] hover:bg-[#ff7b3d]"
+                className="blend-shimmer rounded-full bg-[#ff9f1c] px-6 py-3 text-sm font-bold text-black shadow-[0_0_30px_rgba(255,159,28,0.18)] transition duration-300 hover:scale-[1.03] hover:bg-[#ff9f1c] blend-orange-button"
               >
                 Vamos conversar
               </a>
@@ -138,7 +130,7 @@ export default function HomePage() {
 
             <a
               href="#contato"
-              className="rounded-full bg-[#ff6b2c] px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white md:hidden"
+              className="rounded-full bg-[#ff9f1c] px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-black md:hidden blend-orange-button"
             >
               Contato
             </a>
@@ -146,16 +138,16 @@ export default function HomePage() {
         </header>
 
         {/* Conteúdo principal do Hero */}
-        <div className="relative z-30 mx-auto flex min-h-[calc(100svh-90px)] max-w-7xl flex-col items-center px-6 pb-40 pt-8 text-center md:px-10 md:pt-10 lg:px-16 lg:pt-12">
+        <div className="blend-hero-content relative z-30 mx-auto flex min-h-[calc(100svh-90px)] max-w-7xl flex-col items-center px-6 pb-40 pt-8 text-center md:px-10 md:pt-10 lg:px-16 lg:pt-12">
           {/* Identificação */}
           <div
             data-reveal="up"
             className="relative mb-7 inline-flex items-center gap-3 rounded-full border border-white/[0.09] bg-white/[0.035] px-4 py-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_10px_40px_rgba(0,0,0,0.25)] backdrop-blur-xl"
             style={{ "--reveal-delay": "80ms" } as React.CSSProperties}
           >
-            <span className="absolute left-3 h-5 w-5 rounded-full bg-[#ff6b2c]/20 blur-md" />
+            <span className="absolute left-3 h-5 w-5 rounded-full bg-[#ff9f1c]/20 blur-md" />
 
-            <span className="relative h-1.5 w-1.5 rounded-full bg-[#ff7a32] shadow-[0_0_10px_3px_rgba(255,107,44,0.45)]" />
+            <span className="relative h-1.5 w-1.5 rounded-full bg-[#ff9f1c] shadow-[0_0_10px_3px_rgba(255,159,28,0.45)]" />
 
             <span className="text-xs font-medium tracking-wide text-white/55">
               BLEND Creative Design Studio
@@ -181,9 +173,9 @@ export default function HomePage() {
             </span>{" "}
 
             <span
-              className="bg-gradient-to-b from-[#ffc27c] via-[#ff7a32] to-[#ff4f24] bg-clip-text text-transparent"
+              className="bg-gradient-to-b from-[#ffd6a0] via-[#ff9f1c] to-[#d97b00] bg-clip-text text-transparent"
               style={{
-                filter: "drop-shadow(0 0 28px rgba(255,107,44,0.18))",
+                filter: "drop-shadow(0 0 28px rgba(255,159,28,0.18))",
               }}
             >
               percepção.
@@ -212,7 +204,7 @@ export default function HomePage() {
               className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-[190px] w-[min(110vw,650px)] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[75px]"
               style={{
                 background:
-                  "radial-gradient(ellipse at center, rgba(255,91,35,0.30) 0%, rgba(0,102,173,0.16) 38%, rgba(255,91,35,0.08) 55%, transparent 76%)",
+                  "radial-gradient(ellipse at center, rgba(255,159,28,0.30) 0%, rgba(0,102,173,0.16) 38%, rgba(255,159,28,0.08) 55%, transparent 76%)",
               }}
             />
             <a
@@ -220,7 +212,7 @@ export default function HomePage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Conversar com a Blend Creative pelo WhatsApp"
-                className="blend-shimmer group relative z-10 mt-6 inline-flex items-center gap-3 overflow-hidden rounded-full bg-[#ff6b2c] px-5 py-3 text-xs font-bold text-white shadow-[0_8px_30px_rgba(255,107,44,0.15)] transition duration-300 hover:scale-[1.03] hover:bg-[#ff7840] hover:shadow-[0_8px_40px_rgba(255,107,44,0.28)] sm:mt-0"
+                className="blend-shimmer group relative z-10 inline-flex items-center gap-3 overflow-hidden rounded-full bg-[#ff9f1c] px-5 py-3 text-xs font-bold text-black shadow-[0_8px_30px_rgba(255,159,28,0.15)] transition duration-300 hover:scale-[1.03] hover:bg-[#ff9f1c] hover:shadow-[0_8px_40px_rgba(255,159,28,0.28)] blend-orange-button"
             > 
               <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition duration-700 group-hover:translate-x-full" />
 
@@ -317,7 +309,7 @@ export default function HomePage() {
           className="pointer-events-none absolute -left-40 bottom-0 -z-10 h-[400px] w-[400px] rounded-full blur-[140px]"
           style={{
             background:
-              "radial-gradient(circle, rgba(255,107,44,0.09) 0%, rgba(255,107,44,0.02) 45%, transparent 72%)",
+              "radial-gradient(circle, rgba(255,159,28,0.09) 0%, rgba(255,159,28,0.02) 45%, transparent 72%)",
           }}
         />
 
@@ -350,7 +342,7 @@ export default function HomePage() {
               </h2>
 
               <div className="mt-7 flex items-center gap-4">
-                <div className="h-px w-14 bg-gradient-to-r from-[#ff9f1c] to-[#ff6b2c]" />
+                <div className="h-px w-14 bg-gradient-to-r from-[#ff9f1c] to-[#ff9f1c]" />
 
                 <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/35 sm:text-xs">
                   Estratégia antes da estética
@@ -396,7 +388,7 @@ export default function HomePage() {
                   01 / DIREÇÃO
                 </span>
 
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-[#ff9f1c]/20 bg-[#ff9f1c]/[0.08] text-[#ffb34f] transition-all duration-300 group-hover:border-[#ff9f1c]/45 group-hover:bg-[#ff9f1c]/[0.14]">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-[#ff9f1c]/20 bg-[#ff9f1c]/[0.08] text-[#ff9f1c] transition-all duration-300 group-hover:border-[#ff9f1c]/45 group-hover:bg-[#ff9f1c]/[0.14]">
                   <svg
                     viewBox="0 0 24 24"
                     className="h-6 w-6"
@@ -442,7 +434,7 @@ export default function HomePage() {
             >
               <div
                 className="pointer-events-none absolute -right-16 -top-20 -z-10 h-48 w-48 rounded-full opacity-0 blur-[75px] transition-opacity duration-500 group-hover:opacity-100"
-                style={{ background: "rgba(255,107,44,0.18)" }}
+                style={{ background: "rgba(255,159,28,0.18)" }}
               />
 
               <div className="flex items-start justify-between">
@@ -450,7 +442,7 @@ export default function HomePage() {
                   02 / EXPRESSÃO
                 </span>
 
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-[#ff6b2c]/20 bg-[#ff6b2c]/[0.08] text-[#ff9567] transition-all duration-300 group-hover:border-[#ff6b2c]/45 group-hover:bg-[#ff6b2c]/[0.14]">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-[#ff9f1c]/20 bg-[#ff9f1c]/[0.08] text-[#ff9f1c] transition-all duration-300 group-hover:border-[#ff9f1c]/45 group-hover:bg-[#ff9f1c]/[0.14]">
                   <svg
                     viewBox="0 0 24 24"
                     className="h-6 w-6"
@@ -606,7 +598,7 @@ export default function HomePage() {
           className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[380px] w-[700px] max-w-[120vw] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[130px]"
           style={{
             background:
-              "radial-gradient(ellipse, rgba(255,79,36,0.13) 0%, rgba(255,107,44,0.09) 35%, rgba(255,159,28,0.035) 58%, transparent 75%)",
+              "radial-gradient(ellipse, rgba(255,159,28,0.13) 0%, rgba(255,159,28,0.09) 35%, rgba(255,159,28,0.035) 58%, transparent 75%)",
           }}
         />
 
@@ -616,7 +608,7 @@ export default function HomePage() {
             data-reveal="up"
             className="mb-12 flex items-center gap-3 sm:mb-16"
           >
-            <span className="h-2 w-2 rounded-full bg-[#ff6b2c] shadow-[0_0_12px_rgba(255,107,44,0.55)]" />
+            <span className="h-2 w-2 rounded-full bg-[#ff9f1c] shadow-[0_0_12px_rgba(255,159,28,0.55)]" />
 
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/55">
               Projetos selecionados
@@ -649,7 +641,7 @@ export default function HomePage() {
                 Explore o universo criativo da Blend.
               </p>
 
-              <div className="mt-7 h-px w-full bg-gradient-to-r from-[#ff4f24]/50 via-[#ff9f1c]/20 to-transparent" />
+              <div className="mt-7 h-px w-full bg-gradient-to-r from-[#ff9f1c]/50 via-[#ff9f1c]/20 to-transparent" />
             </div>
           </div>
 
@@ -664,7 +656,7 @@ export default function HomePage() {
               className="pointer-events-none absolute inset-0"
               style={{
                 background:
-                  "linear-gradient(115deg, rgba(255,79,36,0.10) 0%, transparent 38%, rgba(0,102,173,0.09) 100%)",
+                  "linear-gradient(115deg, rgba(255,159,28,0.10) 0%, transparent 38%, rgba(0,102,173,0.09) 100%)",
               }}
             />
 
@@ -686,7 +678,7 @@ export default function HomePage() {
 
               <a
                 href="/projetos"
-                className="blend-shimmer group inline-flex shrink-0 items-center justify-center gap-3 self-start rounded-full bg-[#ff6b2c] px-6 py-4 text-sm font-bold text-white shadow-[0_8px_30px_rgba(255,107,44,0.18)] transition-all duration-300 hover:bg-[#ff7b3d] md:self-center"
+                className="blend-shimmer group inline-flex shrink-0 items-center justify-center gap-3 self-start rounded-full bg-[#ff9f1c] px-6 py-4 text-sm font-bold text-black shadow-[0_8px_30px_rgba(255,159,28,0.18)] transition-all duration-300 hover:bg-[#ff9f1c] md:self-center blend-orange-button"
               >
                 Explorar nossos projetos
 
@@ -723,7 +715,7 @@ export default function HomePage() {
           {/* Linha superior — continuidade com a dobra anterior */}
           <div
             data-reveal="up"
-            className="mb-8 h-px bg-gradient-to-r from-[#ff6b2c]/50 via-white/10 to-transparent sm:mb-10"
+            className="mb-8 h-px bg-gradient-to-r from-[#ff9f1c]/50 via-white/10 to-transparent sm:mb-10"
           />
 
           <div className="grid items-end gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16">
@@ -758,7 +750,7 @@ export default function HomePage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Conversar com a Blend Creative pelo WhatsApp"
-                className="blend-shimmer group relative mt-6 inline-flex items-center gap-3 overflow-hidden rounded-full bg-[#ff6b2c] px-5 py-3 text-xs font-bold text-white shadow-[0_8px_30px_rgba(255,107,44,0.15)] transition duration-300 hover:scale-[1.03] hover:bg-[#ff7840] hover:shadow-[0_8px_40px_rgba(255,107,44,0.28)] sm:mt-7"
+                className="blend-shimmer group relative mt-6 inline-flex items-center gap-3 overflow-hidden rounded-full bg-[#ff9f1c] px-5 py-3 text-xs font-bold text-black shadow-[0_8px_30px_rgba(255,159,28,0.15)] transition duration-300 hover:scale-[1.03] hover:bg-[#ff9f1c] hover:shadow-[0_8px_40px_rgba(255,159,28,0.28)] sm:mt-7 blend-orange-button"
               >
                 <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition duration-700 group-hover:translate-x-full" />
 
@@ -771,16 +763,14 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Fechamento discreto */}
-          <div
-            data-reveal="up"
-            className="mt-10 border-t border-white/[0.10] pt-2 sm:mt-12"
-            style={{ "--reveal-delay": "220ms" } as React.CSSProperties}
-          >
-            <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/35 sm:text-xs">
-              @2026 BLEND CRATIVE DESIGN STUDIO - Todos os direitos reservados
+          <footer id="blend-credits" className="mt-10 flex flex-col items-center gap-1 border-t border-white/[0.10] pt-5 text-center sm:mt-12">
+            <p className="text-[9px] font-semibold leading-5 tracking-[0.04em] text-white/45 sm:text-[10px]">
+              © 2026 BLEND CREATIVE - Todos os direitos reservados
             </p>
-          </div>
+            <p className="text-[9px] font-normal leading-5 tracking-[0.02em] text-white/35 sm:text-[10px]">
+              Desenvolvido por Blend Creative Design Estúdio
+            </p>
+          </footer>
         </div>
       </section>
 

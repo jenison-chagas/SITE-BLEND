@@ -1,94 +1,35 @@
+import ArtworkGallery from "@/components/sections/ArtworkGallery";
+import LandingPageGallery from "@/components/sections/LandingPageGallery";
+import IdentityGallery from "@/components/sections/IdentityGallery";
+import FormatGallery from "@/components/sections/FormatGallery";
+import CampaignGallery from "@/components/sections/CampaignGallery";
+import { getLocalProject } from "@/lib/local-projects";
 
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
-
-type ProjectImage = {
-  id: string | number;
-  image_url: string;
-  alt_text: string | null;
-  sort_order: number | null;
-};
-
-type Project = {
-  id: string | number;
-  title: string;
-  slug: string;
-  cover_image: string | null;
-  category: string | null;
-  description: string | null;
-  created_at: string;
-  project_images: ProjectImage[] | null;
-};
-
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
-async function getProject(slug: string): Promise<Project | null> {
-  const supabase = await createClient();
-
-  const { data, error } = await supabase
-    .from("projects")
-    .select(
-      `
-        *,
-        project_images (
-          id,
-          image_url,
-          alt_text,
-          sort_order
-        )
-      `,
-    )
-    .eq("slug", slug)
-    .eq("published", true)
-    .maybeSingle();
-
-  if (error) {
-    console.error("Erro ao carregar projeto:", error.message);
-    throw new Error("Não foi possível carregar os dados do projeto.");
-  }
-
-  if (!data) {
-    return null;
-  }
-
-  const project = data as unknown as Project;
-
-  project.project_images = [...(project.project_images ?? [])].sort(
-    (a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0),
-  );
-
-  return project;
+async function getProject(slug: string) {
+  const project = getLocalProject(slug);
+  return project?.published ? project : null;
 }
 
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-
-  const supabase = await createClient();
-
-  const { data, error } = await supabase
-    .from("projects")
-    .select("title, description")
-    .eq("slug", slug)
-    .eq("published", true)
-    .maybeSingle();
-
-  if (error || !data) {
-    return {
-      title: "Projeto | Blend Creative Design Studio",
-    };
-  }
+  const project = await getProject(slug);
+  if (!project) notFound();
 
   return {
-    title: `${data.title} | Blend Creative Design Studio`,
-    description:
-      data.description ??
-      `Conheça o projeto ${data.title} desenvolvido pela Blend Creative Design Studio.`,
+    title: project.title,
+    description: project.short_description,
+    openGraph: {
+      title: project.title,
+      description: project.short_description,
+      images: [project.cover_image],
+    },
   };
 }
 
@@ -101,6 +42,7 @@ export default async function ProjetoPage({ params }: PageProps) {
   }
 
   const gallery = project.project_images ?? [];
+  const presentation = getLocalProject(slug);
 
   const whatsappMessage = encodeURIComponent(
     `Olá! Conheci o projeto "${project.title}" no portfólio da Blend Creative Design Studio e gostaria de conversar sobre um projeto.`,
@@ -142,7 +84,7 @@ export default async function ProjetoPage({ params }: PageProps) {
           className="absolute -right-48 top-[600px] h-[480px] w-[480px] rounded-full blur-[150px]"
           style={{
             background:
-              "radial-gradient(circle, rgba(255,107,44,0.12), transparent 70%)",
+              "radial-gradient(circle, rgba(255,159,28,0.12), transparent 70%)",
           }}
         />
       </div>
@@ -176,7 +118,7 @@ export default async function ProjetoPage({ params }: PageProps) {
         {/* Cabeçalho editorial */}
         <header className="mb-10 border-b border-white/[0.09] pb-8 sm:mb-12 sm:pb-10">
           <div className="mb-5 flex items-center gap-3">
-            <span className="h-2 w-2 rounded-full bg-[#ff6b2c] shadow-[0_0_12px_rgba(255,107,44,0.6)]" />
+            <span className="h-2 w-2 rounded-full bg-[#ff9f1c] shadow-[0_0_12px_rgba(255,159,28,0.6)]" />
 
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/50">
               {project.category || "Projeto criativo"}
@@ -210,7 +152,7 @@ export default async function ProjetoPage({ params }: PageProps) {
 
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute -bottom-20 left-1/2 h-32 w-3/4 -translate-x-1/2 rounded-full bg-[#ff6b2c]/10 blur-[70px]"
+                className="pointer-events-none absolute -bottom-20 left-1/2 h-32 w-3/4 -translate-x-1/2 rounded-full bg-[#ff9f1c]/10 blur-[70px]"
               />
             </div>
           </section>
@@ -226,7 +168,7 @@ export default async function ProjetoPage({ params }: PageProps) {
                 </p>
 
                 <h2 className="text-2xl font-medium tracking-tight sm:text-3xl">
-                  Galeria do projeto
+                  {presentation?.gallery_layout === "landing" ? "Desktop e Mobile" : presentation?.gallery_layout === "identity" ? "Apresentação da identidade" : presentation?.gallery_layout === "formats" ? "Feed e Story" : presentation?.gallery_layout === "campaigns" ? "Campanhas mensais" : "Galeria do projeto"}
                 </h2>
               </div>
 
@@ -235,12 +177,23 @@ export default async function ProjetoPage({ params }: PageProps) {
               </span>
             </div>
 
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6">
+            {presentation?.gallery_layout === "artworks" ? (
+              <ArtworkGallery images={presentation.project_images} />
+            ) : presentation?.gallery_layout === "landing" ? (
+              <LandingPageGallery images={presentation.project_images} />
+            ) : presentation?.gallery_layout === "identity" ? (
+              <IdentityGallery images={presentation.project_images} />
+            ) : presentation?.gallery_layout === "formats" ? (
+              <FormatGallery images={presentation.project_images} />
+            ) : presentation?.gallery_layout === "campaigns" ? (
+              <CampaignGallery images={presentation.project_images} />
+            ) : (
+            <div className={presentation ? "grid grid-cols-1 gap-6 sm:gap-10" : "grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6"}>
               {gallery.map((image, index) => (
                 <figure
                   key={image.id}
-                  className={`group relative overflow-hidden rounded-xl border border-white/[0.09] bg-[#0d1016] transition duration-500 hover:border-[#ff6b2c]/40 ${
-                    index === 0 && gallery.length > 2
+                  className={`group relative overflow-hidden rounded-xl border border-white/[0.09] bg-[#0d1016] transition duration-500 hover:border-[#ff9f1c]/40 ${
+                    !presentation && index === 0 && gallery.length > 2
                       ? "sm:col-span-2"
                       : ""
                   }`}
@@ -253,7 +206,7 @@ export default async function ProjetoPage({ params }: PageProps) {
                     }
                     loading="lazy"
                     className={`w-full object-contain transition-transform duration-700 group-hover:scale-[1.015] ${
-                      index === 0 && gallery.length > 2
+                      presentation ? "h-auto" : index === 0 && gallery.length > 2
                         ? "max-h-[760px]"
                         : "max-h-[560px]"
                     }`}
@@ -265,6 +218,7 @@ export default async function ProjetoPage({ params }: PageProps) {
                 </figure>
               ))}
             </div>
+            )}
           </section>
         )}
 
@@ -272,7 +226,7 @@ export default async function ProjetoPage({ params }: PageProps) {
         <section className="relative mt-20 overflow-hidden rounded-2xl border border-white/[0.10] bg-[#0b0d11] p-7 sm:mt-24 sm:p-10 lg:p-14">
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[#ff6b2c]/10 blur-[100px]"
+            className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[#ff9f1c]/10 blur-[100px]"
           />
 
           <div
@@ -301,7 +255,7 @@ export default async function ProjetoPage({ params }: PageProps) {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex shrink-0 items-center justify-center gap-3 rounded-full bg-[#ff9f1c] px-6 py-4 text-sm font-semibold text-[#080a0e] transition hover:-translate-y-0.5 hover:bg-[#ffb34f]"
+              className="inline-flex shrink-0 items-center justify-center gap-3 rounded-full bg-[#ff9f1c] px-6 py-4 text-sm font-semibold text-black transition hover:-translate-y-0.5 hover:bg-[#ff9f1c] blend-orange-button"
             >
               Solicitar um projeto
               <span aria-hidden="true" className="text-lg">

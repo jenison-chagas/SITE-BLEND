@@ -28,7 +28,7 @@ export default async function FeaturedProjects() {
           className="absolute -left-40 top-[45%] h-[400px] w-[400px] rounded-full blur-[140px]"
           style={{
             background:
-              "radial-gradient(circle, rgba(255,107,44,0.08) 0%, rgba(255,107,44,0.02) 45%, transparent 72%)",
+              "radial-gradient(circle, rgba(255,159,28,0.08) 0%, rgba(255,159,28,0.02) 45%, transparent 72%)",
           }}
         />
 
@@ -85,7 +85,7 @@ export default async function FeaturedProjects() {
               href={WHATSAPP_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-7 inline-flex w-fit items-center justify-center gap-3 rounded-full bg-[#ff9f1c] px-6 py-3.5 text-sm font-semibold text-[#080a0e] transition duration-300 hover:-translate-y-0.5 hover:bg-[#ffb347] hover:shadow-[0_8px_30px_rgba(255,159,28,0.18)]"
+              className="mt-7 inline-flex w-fit items-center justify-center gap-3 rounded-full bg-[#ff9f1c] px-6 py-3.5 text-sm font-semibold text-black transition duration-300 hover:-translate-y-0.5 hover:bg-[#ff9f1c] hover:shadow-[0_8px_30px_rgba(255,159,28,0.18)] blend-orange-button"
             >
               <svg
                 aria-hidden="true"
@@ -121,7 +121,7 @@ export default async function FeaturedProjects() {
               href={WHATSAPP_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-7 inline-flex items-center justify-center gap-3 rounded-full bg-[#ff9f1c] px-6 py-3.5 text-sm font-semibold text-[#080a0e] transition duration-300 hover:-translate-y-0.5 hover:bg-[#ffb347]"
+              className="mt-7 inline-flex items-center justify-center gap-3 rounded-full bg-[#ff9f1c] px-6 py-3.5 text-sm font-semibold text-black transition duration-300 hover:-translate-y-0.5 hover:bg-[#ff9f1c] blend-orange-button"
             >
               Solicitar um projeto
               <span aria-hidden="true">↗</span>
@@ -152,7 +152,7 @@ export default async function FeaturedProjects() {
                       <div className="relative flex h-full items-center justify-center overflow-hidden">
                         <div className="absolute h-48 w-48 rounded-full bg-[#0066ad]/20 blur-[70px]" />
 
-                        <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-[#ff6b2c]/10 blur-[70px]" />
+                        <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-[#ff9f1c]/10 blur-[70px]" />
 
                         <span className="relative text-5xl font-black tracking-[-0.06em] text-white/15 sm:text-6xl">
                           BLEND<span className="text-[#ff9f1c]/60">.</span>
@@ -235,7 +235,7 @@ export default async function FeaturedProjects() {
               href={WHATSAPP_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex shrink-0 items-center justify-center gap-3 rounded-full bg-[#ff9f1c] px-6 py-4 text-sm font-semibold text-[#080a0e] transition duration-300 hover:-translate-y-0.5 hover:bg-[#ffb347] hover:shadow-[0_8px_30px_rgba(255,159,28,0.18)]"
+              className="inline-flex shrink-0 items-center justify-center gap-3 rounded-full bg-[#ff9f1c] px-6 py-4 text-sm font-semibold text-black transition duration-300 hover:-translate-y-0.5 hover:bg-[#ff9f1c] hover:shadow-[0_8px_30px_rgba(255,159,28,0.18)] blend-orange-button"
             >
               <svg
                 aria-hidden="true"

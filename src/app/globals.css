@@ -134,7 +134,7 @@ button {
 
     rgba(255, 255, 255, 0.48) 50%,
 
-    rgba(255, 159, 28, 0.24) 58%,
+    rgba(255,159,28, 0.24) 58%,
 
     transparent 75%
 
@@ -176,7 +176,7 @@ button {
 
   box-shadow:
 
-    0 8px 28px rgba(255, 159, 28, 0.18),
+    0 8px 28px rgba(255,159,28, 0.18),
 
     0 0 0 1px rgba(0, 102, 173, 0.28);
 
@@ -352,9 +352,9 @@ button {
 
   box-shadow:
 
-    0 8px 30px rgba(255, 107, 44, 0.24),
+    0 8px 30px rgba(255,159,28, 0.24),
 
-    0 0 24px rgba(255, 107, 44, 0.10);
+    0 0 24px rgba(255,159,28, 0.10);
 
 }
 
@@ -2157,5 +2157,239 @@ html.blend-motion-ready [data-reveal].is-revealed {
 @media (max-width: 430px) and (prefers-reduced-motion: no-preference) {
   .blend-services__track {
     transform: translate3d(calc(-1 * var(--services-horizontal-offset, 0px)), 0, 0) !important;
+  }
+}
+/* Arte de fundo restrita à primeira dobra. */
+#blend-hero .blend-hero-art {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 8% 60%, #ff9f1c0c, transparent 38%),
+    radial-gradient(ellipse at 95% 35%, #ff9f1c0d, transparent 40%), #05070a;
+}
+#blend-hero .blend-hero-art__grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(#ff9f1c14 1px, transparent 1px),
+    linear-gradient(90deg, #ff9f1c14 1px, transparent 1px);
+  background-size: 60px 60px;
+  background-position: center top;
+  mask-image: radial-gradient(ellipse at center, #0003, #000 75%);
+  -webkit-mask-image: radial-gradient(ellipse at center, #0003, #000 75%);
+}
+#blend-hero .blend-hero-art__light {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+#blend-hero .blend-hero-art__shade {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 40%, #05070acc 0%, #05070a88 28%, transparent 65%),
+    linear-gradient(to bottom, #05070a38, transparent 25%, transparent 70%, #050607);
+}
+#blend-hero .blend-hero-art__spark {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #ff9f1c;
+  opacity: 0.55;
+  box-shadow: 0 0 8px 2px #ff9f1c55, 0 0 24px 5px #ff9f1c22;
+}
+#blend-hero .blend-hero-art__spark::before,
+#blend-hero .blend-hero-art__spark::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(90deg, transparent, #ff9f1c88, transparent);
+  width: 24px;
+  height: 1px;
+}
+#blend-hero .blend-hero-art__spark::after { transform: translate(-50%, -50%) rotate(90deg); }
+#blend-hero .blend-hero-art__spark--one { left: calc(50% - 540px); top: 180px; }
+#blend-hero .blend-hero-art__spark--two { left: calc(50% + 480px); top: 300px; }
+#blend-hero .blend-hero-art__spark--three { left: calc(50% - 420px); bottom: 120px; opacity: 0.35; }
+@media (max-width: 639px) {
+  #blend-hero .blend-hero-art__grid { background-size: 44px 44px; opacity: 0.7; }
+  #blend-hero .blend-hero-art__light { width: 160%; max-width: none; left: -30%; opacity: 0.7; }
+  #blend-hero .blend-hero-art__spark--one { left: 22px; top: 132px; }
+  #blend-hero .blend-hero-art__spark--two { left: auto; right: 22px; top: 352px; }
+  #blend-hero .blend-hero-art__spark--three { left: 66px; bottom: 88px; }
+}
+/* Mantém as curvas acima da área reservada ao arco original. */
+#blend-hero .blend-hero-art__light {
+  mask-image: linear-gradient(to top, transparent 320px, #000 440px);
+  -webkit-mask-image: linear-gradient(to top, transparent 320px, #000 440px);
+}
+
+/* Varredura lenta e pulsos discretos, exclusivos do fundo do hero. */
+#blend-hero .blend-hero-art__grid {
+  overflow: hidden;
+}
+#blend-hero .blend-hero-art__grid::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 43%, #ff9f1c0d 49.8%, #ff9f1c1a 50%, #ff9f1c0d 50.2%, transparent 57%);
+  transform: translateY(-42%);
+  animation: blend-hero-scan 8s linear infinite alternate;
+}
+#blend-hero .blend-hero-art__spark {
+  animation: blend-hero-signal 7s ease-in-out infinite;
+}
+#blend-hero .blend-hero-art__spark--two { animation-delay: -2.5s; }
+#blend-hero .blend-hero-art__spark--three { animation-delay: -5s; }
+@keyframes blend-hero-scan {
+  from { transform: translateY(-42%); }
+  to { transform: translateY(42%); }
+}
+@keyframes blend-hero-signal {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.65; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #blend-hero .blend-hero-art__grid::after { animation: none; opacity: 0; }
+  #blend-hero .blend-hero-art__spark { animation: none; }
+}
+/* Celulares e tablets: preserva o espaço superior original e deixa
+   a altura acompanhar o conteúdo, com distância fixa até o arco. */
+@media (max-width: 1023px) {
+  #blend-hero {
+    min-height: 0;
+  }
+  #blend-hero .blend-hero-content {
+    min-height: 0;
+    justify-content: flex-start;
+    padding-bottom: 180px;
+  }
+  #blend-hero .blend-hero-content > [data-reveal] {
+    flex-shrink: 0;
+  }
+}
+/* Notebooks e Full HD: remove a altura vazia abaixo dos avatares,
+   preservando o padding superior e a posição relativa do arco. */
+@media (min-width: 1024px) and (max-width: 1920px) {
+  #blend-hero {
+    min-height: 0;
+  }
+  #blend-hero .blend-hero-content {
+    min-height: 0;
+    justify-content: flex-start;
+    padding-bottom: 180px;
+  }
+  #blend-hero .blend-hero-content > [data-reveal] {
+    flex-shrink: 0;
+  }
+}
+/* Tablets até Full HD: reserva a entrada antes do percurso horizontal. */
+@media (min-width: 768px) and (max-width: 1920px) and (prefers-reduced-motion: no-preference) {
+  #servicos.blend-services {
+    height: calc(100svh + var(--services-scroll-distance) + var(--services-entry-distance, 0px));
+  }
+}
+
+/* Texto, ícones e setas dos botões laranja. */
+a.blend-orange-button,
+button.blend-orange-button,
+a.blend-orange-button:hover,
+button.blend-orange-button:hover {
+  color: #000;
+}
+.blend-orange-button span,
+.blend-orange-button svg {
+  color: inherit;
+}
+
+
+/* Imagens autorais da dobra Serviços: rótulos legíveis sem mudar o scroll. */
+#servicos .blend-service-card__art {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+/* Títulos ocupam o espaço da antiga numeração dos serviços. */
+#servicos .blend-service-card__content h3 {
+  margin-top: 0;
+}
+
+/* Cursor de seta vazada com rastro luminoso curto. */
+.blend-cursor {
+  --cursor-color: #ff9f1c;
+  --cursor-rgb: 255, 159, 28;
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+.blend-cursor.is-visible { opacity: 1; }
+.blend-cursor.is-blue { --cursor-color: #0066ad; --cursor-rgb: 0, 102, 173; }
+.blend-cursor__trail { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.blend-cursor__halo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(var(--cursor-rgb), 0.2), rgba(var(--cursor-rgb), 0.06) 34%, transparent 70%);
+  transform: translate3d(var(--cursor-x, -100px), var(--cursor-y, -100px), 0) translate(-50%, -50%);
+  pointer-events: none;
+  will-change: transform;
+}
+.blend-cursor__arrow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 26px;
+  height: 30px;
+  color: var(--cursor-color);
+  filter: drop-shadow(0 0 3px rgba(var(--cursor-rgb), 0.65)) drop-shadow(0 0 9px rgba(var(--cursor-rgb), 0.25));
+  transform: translate3d(var(--cursor-x, -100px), var(--cursor-y, -100px), 0) translate(-4px, -3px);
+  pointer-events: none;
+  will-change: transform;
+  transition: color 140ms ease, filter 140ms ease;
+}
+.blend-cursor__arrow svg { display: block; width: 100%; height: 100%; color: var(--cursor-color); }
+.blend-cursor.is-interactive .blend-cursor__arrow { filter: drop-shadow(0 0 5px rgba(var(--cursor-rgb), 0.85)) drop-shadow(0 0 13px rgba(var(--cursor-rgb), 0.35)); }
+.blend-cursor.is-pressed .blend-cursor__arrow { opacity: 0.8; }
+.blend-cursor.is-text { opacity: 0; }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  html.blend-cursor-ready,
+  html.blend-cursor-ready * { cursor: none !important; }
+  html.blend-cursor-ready input:not([type="submit"]),
+  html.blend-cursor-ready textarea,
+  html.blend-cursor-ready [contenteditable="true"] { cursor: text !important; }
+}
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .blend-cursor { display: none; }
+}
+
+
+/* Folga de pintura para não cortar acentos e extremidades do título. */
+#blend-hero h1 {
+  max-width: 100%;
+  overflow: visible;
+}
+#blend-hero h1 > span.bg-clip-text {
+  display: inline-block;
+  padding: 0.08em 0.06em 0.14em;
+  margin: -0.08em -0.06em -0.14em;
+  line-height: 1.12;
+  vertical-align: baseline;
+}
+@media (max-width: 639px) {
+  #blend-hero h1 {
+    font-size: clamp(30px, 10.5vw, 48px);
+    line-height: 1.04;
   }
 }

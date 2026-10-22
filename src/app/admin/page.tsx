@@ -46,7 +46,7 @@ export default function HomePage() {
             className="absolute left-1/2 top-0 h-[430px] w-[75%] -translate-x-1/2 rounded-[50%] blur-[110px]"
             style={{
               background:
-                "radial-gradient(ellipse at center, rgba(255,88,25,0.30) 0%, rgba(255,88,25,0.14) 30%, rgba(255,88,25,0.03) 55%, transparent 75%)",
+                "radial-gradient(ellipse at center, rgba(255,159,28,0.30) 0%, rgba(255,159,28,0.14) 30%, rgba(255,159,28,0.03) 55%, transparent 75%)",
             }}
           />
 
@@ -61,11 +61,11 @@ export default function HomePage() {
           <div
             className="absolute left-1/2 top-[65px] h-[440px] w-[82%] -translate-x-1/2 rounded-[50%]"
             style={{
-              borderTop: "2px solid rgba(255,105,45,0.60)",
+              borderTop: "2px solid rgba(255,159,28,0.60)",
               boxShadow: `
-                0 -2px 8px rgba(255,105,45,0.35),
-                0 -8px 25px rgba(255,105,45,0.18),
-                0 -20px 60px rgba(255,105,45,0.08)
+                0 -2px 8px rgba(255,159,28,0.35),
+                0 -8px 25px rgba(255,159,28,0.18),
+                0 -20px 60px rgba(255,159,28,0.08)
               `,
             }}
           />
@@ -73,7 +73,7 @@ export default function HomePage() {
           <div
             className="absolute left-1/2 top-[79px] h-[400px] w-[74%] -translate-x-1/2 rounded-[50%]"
             style={{
-              borderTop: "1px solid rgba(255,190,140,0.16)",
+              borderTop: "1px solid rgba(255,159,28,0.16)",
               filter: "blur(1px)",
             }}
           />
@@ -130,7 +130,7 @@ export default function HomePage() {
 
               <a
                 href="#contato"
-                className="blend-shimmer rounded-full bg-[#ff6b2c] px-6 py-3 text-sm font-bold text-white shadow-[0_0_30px_rgba(255,107,44,0.18)] transition duration-300 hover:scale-[1.03] hover:bg-[#ff7b3d]"
+                className="blend-shimmer rounded-full bg-[#ff9f1c] px-6 py-3 text-sm font-bold text-black shadow-[0_0_30px_rgba(255,159,28,0.18)] transition duration-300 hover:scale-[1.03] hover:bg-[#ff9f1c] blend-orange-button"
               >
                 Vamos conversar
               </a>
@@ -138,7 +138,7 @@ export default function HomePage() {
 
             <a
               href="#contato"
-              className="rounded-full bg-[#ff6b2c] px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white md:hidden"
+              className="rounded-full bg-[#ff9f1c] px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-black md:hidden blend-orange-button"
             >
               Contato
             </a>
@@ -153,9 +153,9 @@ export default function HomePage() {
             className="relative mb-7 inline-flex items-center gap-3 rounded-full border border-white/[0.09] bg-white/[0.035] px-4 py-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_10px_40px_rgba(0,0,0,0.25)] backdrop-blur-xl"
             style={{ "--reveal-delay": "80ms" } as React.CSSProperties}
           >
-            <span className="absolute left-3 h-5 w-5 rounded-full bg-[#ff6b2c]/20 blur-md" />
+            <span className="absolute left-3 h-5 w-5 rounded-full bg-[#ff9f1c]/20 blur-md" />
 
-            <span className="relative h-1.5 w-1.5 rounded-full bg-[#ff7a32] shadow-[0_0_10px_3px_rgba(255,107,44,0.45)]" />
+            <span className="relative h-1.5 w-1.5 rounded-full bg-[#ff9f1c] shadow-[0_0_10px_3px_rgba(255,159,28,0.45)]" />
 
             <span className="text-xs font-medium tracking-wide text-white/55">
               BLEND Creative Design Studio
@@ -181,9 +181,9 @@ export default function HomePage() {
             </span>{" "}
 
             <span
-              className="bg-gradient-to-b from-[#ffc27c] via-[#ff7a32] to-[#ff4f24] bg-clip-text text-transparent"
+              className="bg-gradient-to-b from-[#ff9f1c] via-[#ff9f1c] to-[#ff9f1c] bg-clip-text text-transparent"
               style={{
-                filter: "drop-shadow(0 0 28px rgba(255,107,44,0.18))",
+                filter: "drop-shadow(0 0 28px rgba(255,159,28,0.18))",
               }}
             >
               percepção.
@@ -212,7 +212,7 @@ export default function HomePage() {
               className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-[190px] w-[min(110vw,650px)] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[75px]"
               style={{
                 background:
-                  "radial-gradient(ellipse at center, rgba(255,91,35,0.30) 0%, rgba(0,102,173,0.16) 38%, rgba(255,91,35,0.08) 55%, transparent 76%)",
+                  "radial-gradient(ellipse at center, rgba(255,159,28,0.30) 0%, rgba(0,102,173,0.16) 38%, rgba(255,159,28,0.08) 55%, transparent 76%)",
               }}
             />
             <a
@@ -220,7 +220,7 @@ export default function HomePage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Conversar com a Blend Creative pelo WhatsApp"
-                className="blend-shimmer group relative z-10 mt-6 inline-flex items-center gap-3 overflow-hidden rounded-full bg-[#ff6b2c] px-5 py-3 text-xs font-bold text-white shadow-[0_8px_30px_rgba(255,107,44,0.15)] transition duration-300 hover:scale-[1.03] hover:bg-[#ff7840] hover:shadow-[0_8px_40px_rgba(255,107,44,0.28)] sm:mt-7"
+                className="blend-shimmer group relative z-10 mt-6 inline-flex items-center gap-3 overflow-hidden rounded-full bg-[#ff9f1c] px-5 py-3 text-xs font-bold text-black shadow-[0_8px_30px_rgba(255,159,28,0.15)] transition duration-300 hover:scale-[1.03] hover:bg-[#ff9f1c] hover:shadow-[0_8px_40px_rgba(255,159,28,0.28)] sm:mt-7 blend-orange-button"
             > 
               <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition duration-700 group-hover:translate-x-full" />
 
@@ -317,7 +317,7 @@ export default function HomePage() {
           className="pointer-events-none absolute -left-40 bottom-0 -z-10 h-[400px] w-[400px] rounded-full blur-[140px]"
           style={{
             background:
-              "radial-gradient(circle, rgba(255,107,44,0.09) 0%, rgba(255,107,44,0.02) 45%, transparent 72%)",
+              "radial-gradient(circle, rgba(255,159,28,0.09) 0%, rgba(255,159,28,0.02) 45%, transparent 72%)",
           }}
         />
 
@@ -350,7 +350,7 @@ export default function HomePage() {
               </h2>
 
               <div className="mt-7 flex items-center gap-4">
-                <div className="h-px w-14 bg-gradient-to-r from-[#ff9f1c] to-[#ff6b2c]" />
+                <div className="h-px w-14 bg-gradient-to-r from-[#ff9f1c] to-[#ff9f1c]" />
 
                 <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/35 sm:text-xs">
                   Estratégia antes da estética
@@ -396,7 +396,7 @@ export default function HomePage() {
                   01 / DIREÇÃO
                 </span>
 
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-[#ff9f1c]/20 bg-[#ff9f1c]/[0.08] text-[#ffb34f] transition-all duration-300 group-hover:border-[#ff9f1c]/45 group-hover:bg-[#ff9f1c]/[0.14]">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-[#ff9f1c]/20 bg-[#ff9f1c]/[0.08] text-[#ff9f1c] transition-all duration-300 group-hover:border-[#ff9f1c]/45 group-hover:bg-[#ff9f1c]/[0.14]">
                   <svg
                     viewBox="0 0 24 24"
                     className="h-6 w-6"
@@ -442,7 +442,7 @@ export default function HomePage() {
             >
               <div
                 className="pointer-events-none absolute -right-16 -top-20 -z-10 h-48 w-48 rounded-full opacity-0 blur-[75px] transition-opacity duration-500 group-hover:opacity-100"
-                style={{ background: "rgba(255,107,44,0.18)" }}
+                style={{ background: "rgba(255,159,28,0.18)" }}
               />
 
               <div className="flex items-start justify-between">
@@ -450,7 +450,7 @@ export default function HomePage() {
                   02 / EXPRESSÃO
                 </span>
 
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-[#ff6b2c]/20 bg-[#ff6b2c]/[0.08] text-[#ff9567] transition-all duration-300 group-hover:border-[#ff6b2c]/45 group-hover:bg-[#ff6b2c]/[0.14]">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-[#ff9f1c]/20 bg-[#ff9f1c]/[0.08] text-[#ff9f1c] transition-all duration-300 group-hover:border-[#ff9f1c]/45 group-hover:bg-[#ff9f1c]/[0.14]">
                   <svg
                     viewBox="0 0 24 24"
                     className="h-6 w-6"
@@ -606,7 +606,7 @@ export default function HomePage() {
           className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[380px] w-[700px] max-w-[120vw] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[130px]"
           style={{
             background:
-              "radial-gradient(ellipse, rgba(255,79,36,0.13) 0%, rgba(255,107,44,0.09) 35%, rgba(255,159,28,0.035) 58%, transparent 75%)",
+              "radial-gradient(ellipse, rgba(255,159,28,0.13) 0%, rgba(255,159,28,0.09) 35%, rgba(255,159,28,0.035) 58%, transparent 75%)",
           }}
         />
 
@@ -616,7 +616,7 @@ export default function HomePage() {
             data-reveal="up"
             className="mb-12 flex items-center gap-3 sm:mb-16"
           >
-            <span className="h-2 w-2 rounded-full bg-[#ff6b2c] shadow-[0_0_12px_rgba(255,107,44,0.55)]" />
+            <span className="h-2 w-2 rounded-full bg-[#ff9f1c] shadow-[0_0_12px_rgba(255,159,28,0.55)]" />
 
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/55">
               Projetos selecionados
@@ -649,7 +649,7 @@ export default function HomePage() {
                 Explore o universo criativo da Blend.
               </p>
 
-              <div className="mt-7 h-px w-full bg-gradient-to-r from-[#ff4f24]/50 via-[#ff9f1c]/20 to-transparent" />
+              <div className="mt-7 h-px w-full bg-gradient-to-r from-[#ff9f1c]/50 via-[#ff9f1c]/20 to-transparent" />
             </div>
           </div>
 
@@ -664,7 +664,7 @@ export default function HomePage() {
               className="pointer-events-none absolute inset-0"
               style={{
                 background:
-                  "linear-gradient(115deg, rgba(255,79,36,0.10) 0%, transparent 38%, rgba(0,102,173,0.09) 100%)",
+                  "linear-gradient(115deg, rgba(255,159,28,0.10) 0%, transparent 38%, rgba(0,102,173,0.09) 100%)",
               }}
             />
 
@@ -686,7 +686,7 @@ export default function HomePage() {
 
               <a
                 href="/projetos"
-                className="blend-shimmer group inline-flex shrink-0 items-center justify-center gap-3 self-start rounded-full bg-[#ff6b2c] px-6 py-4 text-sm font-bold text-white shadow-[0_8px_30px_rgba(255,107,44,0.18)] transition-all duration-300 hover:bg-[#ff7b3d] md:self-center"
+                className="blend-shimmer group inline-flex shrink-0 items-center justify-center gap-3 self-start rounded-full bg-[#ff9f1c] px-6 py-4 text-sm font-bold text-black shadow-[0_8px_30px_rgba(255,159,28,0.18)] transition-all duration-300 hover:bg-[#ff9f1c] md:self-center blend-orange-button"
               >
                 Explorar nossos projetos
 
@@ -723,7 +723,7 @@ export default function HomePage() {
           {/* Linha superior — continuidade com a dobra anterior */}
           <div
             data-reveal="up"
-            className="mb-8 h-px bg-gradient-to-r from-[#ff6b2c]/50 via-white/10 to-transparent sm:mb-10"
+            className="mb-8 h-px bg-gradient-to-r from-[#ff9f1c]/50 via-white/10 to-transparent sm:mb-10"
           />
 
           <div className="grid items-end gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16">
@@ -758,7 +758,7 @@ export default function HomePage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Conversar com a Blend Creative pelo WhatsApp"
-                className="blend-shimmer group relative mt-6 inline-flex items-center gap-3 overflow-hidden rounded-full bg-[#ff6b2c] px-5 py-3 text-xs font-bold text-white shadow-[0_8px_30px_rgba(255,107,44,0.15)] transition duration-300 hover:scale-[1.03] hover:bg-[#ff7840] hover:shadow-[0_8px_40px_rgba(255,107,44,0.28)] sm:mt-7"
+                className="blend-shimmer group relative mt-6 inline-flex items-center gap-3 overflow-hidden rounded-full bg-[#ff9f1c] px-5 py-3 text-xs font-bold text-black shadow-[0_8px_30px_rgba(255,159,28,0.15)] transition duration-300 hover:scale-[1.03] hover:bg-[#ff9f1c] hover:shadow-[0_8px_40px_rgba(255,159,28,0.28)] sm:mt-7 blend-orange-button"
               >
                 <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition duration-700 group-hover:translate-x-full" />
 

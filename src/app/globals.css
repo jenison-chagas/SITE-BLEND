@@ -2289,6 +2289,10 @@ html.blend-motion-ready [data-reveal].is-revealed {
 }
 /* Tablets até Full HD: reserva a entrada antes do percurso horizontal. */
 @media (min-width: 768px) and (max-width: 1920px) and (prefers-reduced-motion: no-preference) {
+  #servicos .blend-services__track {
+    padding-right: 24px;
+  }
+
   #servicos.blend-services {
     height: calc(100svh + var(--services-scroll-distance) + var(--services-entry-distance, 0px));
   }

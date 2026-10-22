@@ -7,7 +7,12 @@ export default function IdentityGallery({ images }: { images: LocalProjectImage[
     <div>
       {presentation && (
         <figure className="overflow-hidden rounded-xl border border-white/10 bg-white">
-          <img src={presentation.image_url} alt={presentation.alt_text} loading="lazy" width={1600} height={8188} className="h-auto w-full" />
+          <div
+            className={presentation.id === "gleide-apresentacao" ? "relative overflow-hidden" : undefined}
+            style={presentation.id === "gleide-apresentacao" ? { aspectRatio: "1600 / 7980" } : undefined}
+          >
+            <img src={presentation.image_url} alt={presentation.alt_text} loading="lazy" width={1600} height={8188} className={presentation.id === "gleide-apresentacao" ? "absolute inset-x-0 top-0 h-auto w-full" : "h-auto w-full"} />
+          </div>
         </figure>
       )}
       {logos.length > 0 && (

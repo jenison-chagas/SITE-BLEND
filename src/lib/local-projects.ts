@@ -66,7 +66,7 @@ export const localProjects: LocalProject[] = [
   "category": "Design Social Media",
   "cover_image": "/projects/aurora-soft-line/capa.webp",
   "short_description": "Campanhas mensais de junho e julho, com uma linguagem visual própria para cada marca.",
-  "description": "Design Social Media desenvolvido em campanhas mensais para Aurora Softline. O projeto reúne as peças das campanhas de junho e julho, organizadas por mês e por marca.\n\nAs artes exploram temas de gestão, tecnologia, educação, segurança do trabalho e saúde mental, com composições, cores e elementos gráficos próprios para AEFETIVA, AETECH, EDUCA.SYS, GESST e SMP. A apresentação reúne todas as 29 peças finalizadas dessas duas campanhas.",
+  "description": "Design Social Media desenvolvido em campanhas mensais para Aurora Softline. O projeto reúne as peças das campanhas de junho e julho, organizadas por empresa.\n\nAs artes exploram temas de gestão, tecnologia, educação, segurança do trabalho e saúde mental, com composições, cores e elementos gráficos próprios para AEFETIVA, AETECH, EDUCA.SYS, GESST e SMP. A apresentação reúne todas as 31 peças finalizadas dessas duas campanhas.",
   "created_at": "2026-10-22T13:00:00.000Z",
   "published": true,
   "featured": false,
@@ -301,6 +301,22 @@ export const localProjects: LocalProject[] = [
       "image_url": "/projects/aurora-soft-line/peca-29.webp",
       "alt_text": "Julho · SMP — Nenhum proceswso se sustenta com pessoas adoecidas",
       "sort_order": 29,
+      "month": "Julho",
+      "brand": "SMP"
+    },
+    {
+      "id": "aurora-30",
+      "image_url": "/projects/aurora-soft-line/peca-30.webp",
+      "alt_text": "Julho · SMP — Quando o problema aparece, ele já vem estruturado",
+      "sort_order": 30,
+      "month": "Julho",
+      "brand": "SMP"
+    },
+    {
+      "id": "aurora-31",
+      "image_url": "/projects/aurora-soft-line/peca-31.webp",
+      "alt_text": "Julho · SMP — Sua empresa já mapeou os riscos psicossociais?",
+      "sort_order": 31,
       "month": "Julho",
       "brand": "SMP"
     }

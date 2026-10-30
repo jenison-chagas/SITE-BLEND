@@ -1,7 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  async redirects() {
+    return [{
+      source: "/projetos/otica-e-imagem",
+      destination: "/projetos/grupo-alves-barreto",
+      permanent: true,
+    }];
+  },
 };
 
 export default nextConfig;

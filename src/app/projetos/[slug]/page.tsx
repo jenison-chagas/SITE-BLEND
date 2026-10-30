@@ -168,7 +168,7 @@ export default async function ProjetoPage({ params }: PageProps) {
                 </p>
 
                 <h2 className="text-2xl font-medium tracking-tight sm:text-3xl">
-                  {presentation?.gallery_layout === "landing" ? "Desktop e Mobile" : presentation?.gallery_layout === "identity" ? "Apresentação da identidade" : presentation?.gallery_layout === "formats" ? "Feed e Story" : presentation?.gallery_layout === "campaigns" ? "Campanhas mensais" : "Galeria do projeto"}
+                  {presentation?.gallery_layout === "landing" ? (gallery.some((image) => image.page_title) ? "Página principal e empresas do grupo" : "Desktop e Mobile") : presentation?.gallery_layout === "identity" ? "Apresentação da identidade" : presentation?.gallery_layout === "formats" ? "Feed e Story" : presentation?.gallery_layout === "campaigns" ? "Campanhas mensais" : "Galeria do projeto"}
                 </h2>
               </div>
 

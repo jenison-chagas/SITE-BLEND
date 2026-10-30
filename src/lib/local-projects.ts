@@ -4,6 +4,7 @@ export type LocalProjectImage = {
   alt_text: string;
   sort_order: number;
   screen?: "Desktop" | "Mobile";
+  page_title?: string;
   width?: number;
   height?: number;
   background?: string;
@@ -457,35 +458,57 @@ export const localProjects: LocalProject[] = [
   ]
 },
   {
-  "id": "otica-e-imagem",
-  "title": "Ótica & Imagem",
-  "slug": "otica-e-imagem",
+  "id": "grupo-alves-barreto",
+  "title": "Grupo Alves Barreto",
+  "slug": "grupo-alves-barreto",
   "category": "Landing Page",
-  "cover_image": "/projects/otica-e-imagem/capa.webp",
-  "short_description": "Landing page em versões desktop e mobile para apresentar serviços ópticos e facilitar o contato pelo WhatsApp.",
-  "description": "Landing page desenvolvida para Ótica & Imagem, com uma identidade em azul e ciano e uma comunicação voltada à apresentação dos serviços ópticos. A página reúne os diferenciais do atendimento, os serviços, a história da ótica e chamadas para contato pelo WhatsApp.\n\nO projeto é apresentado integralmente nas versões desktop e mobile, mostrando a organização das informações e a adaptação das seções para cada formato de tela.",
-  "created_at": "2026-10-22T16:00:00.000Z",
+  "cover_image": "/projects/grupo-alves-barreto/capa.webp",
+  "short_description": "Página institucional do Grupo Alves Barreto e páginas dedicadas às três empresas do grupo.",
+  "description": "Projeto de Landing Page para o Grupo Alves Barreto, com uma página principal que apresenta a força e a integração das três operações do grupo. A identidade visual em vermelho, branco e preto organiza a apresentação das empresas, a trajetória do grupo e as chamadas para contato.\n\nA apresentação destaca a página institucional e reúne também as páginas completas do Lojão A Eletricidade, da A Eletricidade — Serviços e da Alves Barreto Distribuidora. Cada empresa tem uma comunicação própria para seus produtos, serviços, diferenciais e atendimento.",
+  "created_at": "2026-10-30T12:00:00.000Z",
   "published": true,
   "featured": false,
   "gallery_layout": "landing",
   "project_images": [
     {
-      "id": "otica-desktop",
-      "image_url": "/projects/otica-e-imagem/desktop.webp",
-      "alt_text": "Ótica & Imagem — landing page completa na versão desktop",
+      "id": "alves-barreto-principal",
+      "image_url": "/projects/grupo-alves-barreto/principal.webp",
+      "alt_text": "Grupo Alves Barreto — Página principal — página completa do site",
       "sort_order": 1,
       "screen": "Desktop",
-      "width": 2560,
-      "height": 5733
+      "page_title": "Grupo Alves Barreto — Página principal",
+      "width": 1264,
+      "height": 2274
     },
     {
-      "id": "otica-mobile",
-      "image_url": "/projects/otica-e-imagem/mobile.webp",
-      "alt_text": "Ótica & Imagem — landing page completa na versão mobile",
+      "id": "alves-barreto-lojao",
+      "image_url": "/projects/grupo-alves-barreto/lojao.webp",
+      "alt_text": "Lojão A Eletricidade — página completa do site",
       "sort_order": 2,
-      "screen": "Mobile",
-      "width": 320,
-      "height": 5342
+      "screen": "Desktop",
+      "page_title": "Lojão A Eletricidade",
+      "width": 1264,
+      "height": 3292
+    },
+    {
+      "id": "alves-barreto-servicos",
+      "image_url": "/projects/grupo-alves-barreto/servicos.webp",
+      "alt_text": "A Eletricidade — Serviços — página completa do site",
+      "sort_order": 3,
+      "screen": "Desktop",
+      "page_title": "A Eletricidade — Serviços",
+      "width": 1264,
+      "height": 2287
+    },
+    {
+      "id": "alves-barreto-distribuidora",
+      "image_url": "/projects/grupo-alves-barreto/distribuidora.webp",
+      "alt_text": "Alves Barreto Distribuidora — página completa do site",
+      "sort_order": 4,
+      "screen": "Desktop",
+      "page_title": "Alves Barreto Distribuidora",
+      "width": 1264,
+      "height": 2198
     }
   ]
 },

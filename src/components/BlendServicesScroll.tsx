@@ -82,6 +82,14 @@ export default function BlendServicesScroll() {
 
     if (!viewport || !track) return;
 
+    const panel = sectionRef.current?.firstElementChild;
+    if (panel && sectionRef.current) {
+      sectionRef.current.style.setProperty(
+        "--services-panel-height",
+        `${Math.ceil(panel.getBoundingClientRect().height)}px`
+      );
+    }
+
     const distance = Math.max(
       0,
       Math.ceil(track.scrollWidth - viewport.clientWidth)
@@ -133,6 +141,7 @@ export default function BlendServicesScroll() {
 
     if (viewportRef.current) observer.observe(viewportRef.current);
     if (trackRef.current) observer.observe(trackRef.current);
+    if (sectionRef.current?.firstElementChild) observer.observe(sectionRef.current.firstElementChild);
 
     window.addEventListener("resize", measureAfterLayout);
     window.addEventListener("orientationchange", measureAfterLayout);

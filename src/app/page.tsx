@@ -42,7 +42,7 @@ export default function HomePage() {
           <div className="blend-hero-art__shade" />
         </div>
         {/* Horizonte de luz */}
-        <div className="pointer-events-none absolute bottom-[-360px] left-1/2 z-0 h-[520px] w-[180vw] -translate-x-1/2">
+        <div className="blend-hero-horizon pointer-events-none absolute bottom-[-360px] left-1/2 z-0 h-[520px] w-[180vw] -translate-x-1/2">
           <div
             className="absolute left-1/2 top-0 h-[430px] w-[75%] -translate-x-1/2 rounded-[50%] blur-[110px]"
             style={{
@@ -60,7 +60,7 @@ export default function HomePage() {
           />
 
           <div
-            className="absolute left-1/2 top-[65px] h-[440px] w-[82%] -translate-x-1/2 rounded-[50%]"
+            className="blend-hero-horizon__arc absolute left-1/2 top-[65px] h-[440px] w-[82%] -translate-x-1/2 rounded-[50%]"
             style={{
               borderTop: "2px solid rgba(255,159,28,0.60)",
               boxShadow: `
@@ -72,7 +72,7 @@ export default function HomePage() {
           />
 
           <div
-            className="absolute left-1/2 top-[79px] h-[400px] w-[74%] -translate-x-1/2 rounded-[50%]"
+            className="blend-hero-horizon__echo absolute left-1/2 top-[79px] h-[400px] w-[74%] -translate-x-1/2 rounded-[50%]"
             style={{
               borderTop: "1px solid rgba(255,159,28,0.16)",
               filter: "blur(1px)",

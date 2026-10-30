@@ -2038,7 +2038,7 @@ html.blend-motion-ready [data-reveal].is-revealed {
 
 @media (max-width: 767px) and (prefers-reduced-motion: no-preference) {
   .blend-services {
-    height: calc(100svh + var(--services-scroll-distance));
+    height: calc(var(--services-panel-height, 100svh) + var(--services-scroll-distance));
     min-height: 0;
     background: var(--services-background, #111111);
   }
@@ -2046,7 +2046,7 @@ html.blend-motion-ready [data-reveal].is-revealed {
   .blend-services__sticky {
     position: sticky;
     top: 0;
-    height: 100svh;
+    height: auto;
     min-height: 0;
     padding: 22px 0 14px;
     overflow: hidden;
@@ -2100,6 +2100,7 @@ html.blend-motion-ready [data-reveal].is-revealed {
     width: max-content;
     padding: 0 24px;
     will-change: transform;
+    transform: translate3d(calc(-1 * var(--services-horizontal-offset, 0px)), 0, 0) !important;
   }
 
   .blend-service-card {
@@ -2146,7 +2147,7 @@ html.blend-motion-ready [data-reveal].is-revealed {
     justify-content: space-between;
     gap: 10px;
     padding: 14px 24px 0;
-    margin-top: auto;
+    margin-top: 24px;
     font-size: 8px;
     letter-spacing: 0.08em;
   }
@@ -2285,6 +2286,24 @@ html.blend-motion-ready [data-reveal].is-revealed {
   }
   #blend-hero .blend-hero-content > [data-reveal] {
     flex-shrink: 0;
+  }
+}
+/* Celulares: arco mais baixo e transição compacta para a próxima dobra. */
+@media (max-width: 767px) {
+  #blend-hero .blend-hero-content {
+    padding-bottom: 136px;
+  }
+
+  #blend-hero .blend-hero-horizon {
+    bottom: -395px;
+  }
+
+  #blend-hero .blend-hero-horizon__arc {
+    height: 240px;
+  }
+
+  #blend-hero .blend-hero-horizon__echo {
+    height: 210px;
   }
 }
 /* Tablets até Full HD: reserva a entrada antes do percurso horizontal. */

@@ -2434,12 +2434,14 @@ button.blend-orange-button:hover {
   .blend-shimmer::before {
     transition-duration: var(--blend-fx-scene);
   }
-  #servicos .blend-service-card__image {
+  #servicos .blend-service-card__image,
+  [aria-label="Portfólio completo de projetos"] a.group > div:first-child {
     position: relative;
     overflow: hidden;
     isolation: isolate;
   }
-  #servicos .blend-service-card__image::after {
+  #servicos .blend-service-card__image::after,
+  [aria-label="Portfólio completo de projetos"] a.group > div:first-child::after {
     content: "";
     position: absolute;
     inset: 0;
@@ -2451,15 +2453,18 @@ button.blend-orange-button:hover {
     transition: opacity var(--blend-fx-interaction) ease,
       transform var(--blend-fx-scene) var(--blend-fx-ease);
   }
-  #servicos .blend-service-card__art {
+  #servicos .blend-service-card__art,
+  [aria-label="Portfólio completo de projetos"] a.group > div:first-child > img {
     transition: transform var(--blend-fx-scene) var(--blend-fx-ease);
   }
   @media (hover: hover) and (pointer: fine) {
-    #servicos .blend-service-card:hover .blend-service-card__image::after {
+    #servicos .blend-service-card:hover .blend-service-card__image::after,
+    [aria-label="Portfólio completo de projetos"] a.group:is(:hover, :focus-visible) > div:first-child::after {
       opacity: 1;
       transform: translateX(120%);
     }
-    #servicos .blend-service-card:hover .blend-service-card__art {
+    #servicos .blend-service-card:hover .blend-service-card__art,
+    [aria-label="Portfólio completo de projetos"] a.group:is(:hover, :focus-visible) > div:first-child > img {
       transform: scale(1.025);
     }
   }

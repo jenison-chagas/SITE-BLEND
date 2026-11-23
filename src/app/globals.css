@@ -2720,3 +2720,33 @@ html:has(#blend-hero) {
     bottom: 24px;
   }
 }
+
+/* Títulos dos cards no tratamento display da referência, usando a família atual da Blend. */
+#sobre .blend-service-card > h3 {
+  font-size: clamp(30px, 3.4vw, 52px);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+  max-width: 100%;
+  padding-block: 0.08em 0.12em;
+  margin-block: -0.08em -0.12em;
+}
+@supports ((background-clip: text) or (-webkit-background-clip: text)) {
+  #sobre .blend-service-card > h3 {
+    background-image: linear-gradient(180deg, #fff 15%, rgb(255 255 255 / 0.9) 45%, rgb(255 255 255 / 0.24) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+#sobre .blend-service-card > p {
+  font-size: clamp(14px, 1.35vw, 18px);
+  font-weight: 500;
+  line-height: 1.4;
+  text-wrap: pretty;
+}
+@media (max-width: 767px) {
+  #sobre .blend-service-card > h3 { font-size: clamp(36px, 10vw, 46px); }
+  #sobre .blend-service-card > p { font-size: 16px; }
+}
+

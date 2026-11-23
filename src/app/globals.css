@@ -2750,3 +2750,17 @@ html:has(#blend-hero) {
   #sobre .blend-service-card > p { font-size: 16px; }
 }
 
+
+/* Presença acompanha os mesmos acentos laranja de Estratégia e Identidade. */
+#sobre .blend-service-card:last-child > div:first-child {
+  background: rgb(255 159 28 / 0.18) !important;
+}
+#sobre .blend-service-card:last-child > div.flex.items-start.justify-between > div {
+  color: var(--blend-orange);
+  border-color: rgb(255 159 28 / 0.2);
+  background: rgb(255 159 28 / 0.08);
+}
+#sobre .blend-service-card:last-child:hover > div.flex.items-start.justify-between > div {
+  border-color: rgb(255 159 28 / 0.45);
+  background: rgb(255 159 28 / 0.14);
+}

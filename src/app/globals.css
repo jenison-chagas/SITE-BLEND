@@ -2416,3 +2416,51 @@ button.blend-orange-button:hover {
     line-height: 1.04;
   }
 }
+
+/* Design System: somente efeitos; identidade e medidas existentes preservadas. */
+:root {
+  --blend-fx-interaction: 300ms;
+  --blend-fx-scene: 800ms;
+  --blend-fx-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+@media (prefers-reduced-motion: no-preference) {
+  html.blend-motion-ready [data-reveal],
+  .blend-positioning [data-reveal] {
+    transition-duration: var(--blend-fx-scene);
+  }
+  .blend-shimmer {
+    transition-duration: var(--blend-fx-interaction);
+  }
+  .blend-shimmer::before {
+    transition-duration: var(--blend-fx-scene);
+  }
+  #servicos .blend-service-card__image {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  #servicos .blend-service-card__image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(110deg, transparent 25%, rgb(255 255 255 / 0.12) 50%, transparent 75%);
+    opacity: 0;
+    transform: translateX(-120%);
+    transition: opacity var(--blend-fx-interaction) ease,
+      transform var(--blend-fx-scene) var(--blend-fx-ease);
+  }
+  #servicos .blend-service-card__art {
+    transition: transform var(--blend-fx-scene) var(--blend-fx-ease);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    #servicos .blend-service-card:hover .blend-service-card__image::after {
+      opacity: 1;
+      transform: translateX(120%);
+    }
+    #servicos .blend-service-card:hover .blend-service-card__art {
+      transform: scale(1.025);
+    }
+  }
+}

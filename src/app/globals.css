@@ -2551,3 +2551,43 @@ button.blend-orange-button:hover {
   #blend-hero .blend-hero-art::before { animation: none; }
   #blend-hero > header nav > a { transition: none; }
 }
+
+/* Menu fixo: links no centro e espaço para o conteúdo continuar legível. */
+#blend-hero {
+  --blend-menu-space: 90px;
+  padding-top: var(--blend-menu-space);
+}
+#blend-hero > header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 80;
+  width: 100%;
+  pointer-events: none;
+}
+#blend-hero > header > div {
+  pointer-events: auto;
+  background: rgb(5 7 10 / 0.72);
+}
+html:has(#blend-hero) {
+  scroll-padding-top: 112px;
+}
+@media (min-width: 768px) {
+  #blend-hero > header > div {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) repeat(4, auto) minmax(0, 1fr);
+    gap: clamp(12px, 2vw, 28px);
+  }
+  #blend-hero > header > div > a:first-child { justify-self: start; }
+  #blend-hero > header nav { display: contents; }
+  #blend-hero > header nav > .blend-orange-button {
+    justify-self: end;
+    white-space: nowrap;
+  }
+}
+.blend-services__sticky { padding-top: 112px; }
+@media (max-width: 767px) {
+  #blend-hero { --blend-menu-space: 129px; }
+  html:has(#blend-hero) { scroll-padding-top: 150px; }
+  #blend-hero > header nav { justify-content: center; gap: clamp(14px, 5vw, 28px); }
+  .blend-services__sticky { padding-top: 144px; }
+}

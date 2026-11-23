@@ -1,3 +1,4 @@
+import BlendHeadingMotion from "@/components/BlendHeadingMotion";
 import BlendCursor from "@/components/BlendCursor";
 import CinematicLoader from "@/components/CinematicLoader";
 import type { Metadata } from "next";
@@ -27,6 +28,7 @@ export default function RootLayout({
   />
 
   <BlendCursor />
+  <BlendHeadingMotion />
   {children}
 </body>
     </html>

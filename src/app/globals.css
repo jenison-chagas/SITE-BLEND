@@ -2469,3 +2469,85 @@ button.blend-orange-button:hover {
     }
   }
 }
+
+/* Primeira dobra: luz e vidro adaptados à identidade Blend. */
+#blend-hero .blend-hero-art::before {
+  content: "";
+  position: absolute;
+  inset: -12% -8% 16%;
+  pointer-events: none;
+  background: linear-gradient(320deg, var(--blend-orange) 0%, rgb(255 159 28 / 0.55) 11%, transparent 50%, var(--blend-blue) 90%, rgb(0 102 173 / 0.8) 100%);
+  opacity: 0.32;
+  filter: blur(64px);
+  transform: translate3d(-2%, -1%, 0) rotate(-4deg) scale(1.04);
+  animation: blend-signature-light 18s ease-in-out infinite alternate;
+  -webkit-mask-image: linear-gradient(#000 65%, transparent 100%);
+  mask-image: linear-gradient(#000 65%, transparent 100%);
+}
+#blend-hero > header {
+  padding-top: 16px;
+}
+#blend-hero > header > div {
+  width: calc(100% - 48px);
+  max-width: 1152px;
+  margin-inline: auto;
+  padding: 14px 20px;
+  gap: 24px;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: 24px;
+  background: rgb(255 255 255 / 0.05);
+  -webkit-backdrop-filter: blur(28px);
+  backdrop-filter: blur(28px);
+  box-shadow: inset 0 0 20px rgb(255 255 255 / 0.08), inset 1px 1px 1px rgb(255 255 255 / 0.18), inset -1px -1px 1px rgb(255 255 255 / 0.07), 0 4px 16px rgb(0 0 0 / 0.2);
+}
+#blend-hero > header nav {
+  gap: clamp(12px, 2vw, 28px);
+}
+#blend-hero > header nav > a:not(.blend-orange-button) {
+  padding: 8px 2px;
+  transition: color 300ms ease, text-shadow 300ms ease;
+}
+#blend-hero > header nav > a:not(.blend-orange-button):is(:hover, :focus-visible) {
+  color: var(--blend-orange);
+  text-shadow: 0 0 20px rgb(255 159 28 / 0.3);
+}
+#blend-hero > header nav > a:focus-visible {
+  outline: 2px solid var(--blend-orange);
+  outline-offset: 5px;
+  border-radius: 4px;
+}
+@keyframes blend-signature-light {
+  from { transform: translate3d(-2%, -1%, 0) rotate(-4deg) scale(1.04); }
+  to { transform: translate3d(2%, 2%, 0) rotate(4deg) scale(1.1); }
+}
+@media (max-width: 767px) {
+  #blend-hero > header { padding-top: 12px; }
+  #blend-hero > header > div {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    width: calc(100% - 32px);
+    padding: 12px 14px;
+    gap: 10px 12px;
+    border-radius: 22px;
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+  }
+  #blend-hero > header > div > a:first-child { grid-column: 1; grid-row: 1; }
+  #blend-hero > header > div > a:last-child { grid-column: 2; grid-row: 1; }
+  #blend-hero > header nav {
+    display: flex;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-content: space-between;
+    gap: 8px;
+    border-top: 1px solid rgb(255 255 255 / 0.07);
+    padding-top: 4px;
+  }
+  #blend-hero > header nav > .blend-orange-button { display: none; }
+  #blend-hero > header nav > a:not(.blend-orange-button) { padding: 8px 2px; }
+  #blend-hero .blend-hero-art::before { opacity: 0.25; filter: blur(44px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  #blend-hero .blend-hero-art::before { animation: none; }
+  #blend-hero > header nav > a { transition: none; }
+}

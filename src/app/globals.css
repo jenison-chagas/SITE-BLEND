@@ -2663,3 +2663,60 @@ html:has(#blend-hero) {
   .blend-orange-button::after { transition: none; }
 }
 
+
+/* Segunda dobra: composição centralizada com grid e vidro, sem rótulos numerados ou setas. */
+#sobre .blend-service-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 380px;
+  padding: 56px 28px 100px;
+  border-radius: 28px;
+  text-align: center;
+}
+#sobre .blend-service-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: inherit;
+  background-image: linear-gradient(90deg, rgb(255 255 255 / 0.035) 1px, transparent 1px), linear-gradient(rgb(255 255 255 / 0.035) 1px, transparent 1px), radial-gradient(140% 107% at 50% 10%, transparent 40%, rgb(255 255 255 / 0.025) 75%, rgb(255 255 255 / 0.05) 100%);
+  background-size: 64px 64px, 64px 64px, 100% 100%;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 45%, #000 35%, transparent 100%);
+  mask-image: radial-gradient(ellipse at 50% 45%, #000 35%, transparent 100%);
+}
+#sobre .blend-service-card > div.flex.items-start.justify-between {
+  position: absolute;
+  left: 28px;
+  bottom: 26px;
+}
+#sobre .blend-service-card > div.flex.items-start.justify-between > span,
+#sobre .blend-service-card > div:last-child > span:last-child {
+  display: none;
+}
+#sobre .blend-service-card > div.flex.items-start.justify-between > div {
+  border-radius: 50%;
+  -webkit-backdrop-filter: saturate(1.2) blur(12px);
+  backdrop-filter: saturate(1.2) blur(12px);
+  box-shadow: inset 4.5px 4.5px 1.5px -5px rgb(255 255 255 / 0.5), inset -4.5px -4.5px 1.5px -5px rgb(255 255 255 / 0.15);
+}
+#sobre .blend-service-card > h3 { margin: 0; }
+#sobre .blend-service-card > p { margin: 14px 0 0; }
+#sobre .blend-service-card > div:last-child {
+  justify-content: center;
+  margin-top: 22px;
+  padding-top: 0;
+  border-top: 0;
+}
+@media (max-width: 767px) {
+  #sobre .blend-service-card {
+    min-height: 330px;
+    padding: 44px 24px 94px;
+  }
+  #sobre .blend-service-card > div.flex.items-start.justify-between {
+    left: 24px;
+    bottom: 24px;
+  }
+}

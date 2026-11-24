@@ -1,7 +1,10 @@
+import Link from "next/link";
+import { localProjects } from "@/lib/local-projects";
 import BlendServicesScroll from "@/components/BlendServicesScroll";
 import BlendMotion from "@/components/BlendMotion";
 
 export default function HomePage() {
+  const projects = localProjects.filter((project) => project.published);
   return (
     <main className="min-h-screen overflow-x-clip bg-[#05070a] text-white">
       <BlendMotion />
@@ -93,7 +96,7 @@ export default function HomePage() {
 
             <nav className="hidden items-center gap-8 md:flex">
               <a
-                href="/projetos"
+                href="#projetos"
                 className="text-sm text-white/60 transition hover:text-white"
               >
                 Projetos
@@ -647,7 +650,6 @@ export default function HomePage() {
 
           {/* Faixa visual de destaque */}
           <div
-            data-reveal="up"
             className="relative mt-12 overflow-hidden rounded-2xl border border-white/[0.09] bg-[#0b0d11] sm:mt-16"
             style={{ "--reveal-delay": "120ms" } as React.CSSProperties}
           >
@@ -660,7 +662,7 @@ export default function HomePage() {
               }}
             />
 
-            <div className="relative flex flex-col gap-8 p-7 sm:p-10 md:flex-row md:items-center md:justify-between md:p-12 lg:p-14">
+            <div className="relative px-5 pt-7 sm:px-8 sm:pt-10 lg:px-10 lg:pt-12">
               <div className="max-w-2xl">
                 <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#ff9f1c] sm:text-xs">
                   BLEND CREATIVE DESIGN STUDIO
@@ -675,21 +677,99 @@ export default function HomePage() {
                   transformamos conceitos em comunicação visual.
                 </p>
               </div>
-
-              <a
-                href="/projetos"
-                className="blend-shimmer group inline-flex shrink-0 items-center justify-center gap-3 self-start rounded-full bg-[#ff9f1c] px-6 py-4 text-sm font-bold text-black shadow-[0_8px_30px_rgba(255,159,28,0.18)] transition-all duration-300 hover:bg-[#ff9f1c] md:self-center blend-orange-button"
-              >
-                Explorar nossos projetos
-
-                <span
-                  aria-hidden="true"
-                  className="text-lg transition-transform duration-300 group-hover:translate-x-1"
-                >
-                  ↗
-                </span>
-              </a>
             </div>
+        {projects.length > 0 ? (
+          <section
+            aria-label="Portfólio completo de projetos"
+            className="relative p-5 sm:p-8 lg:p-10"
+          >
+            <div className="grid grid-cols-1 gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-6 lg:gap-y-12">
+              {projects.map((project) => (
+                <Link
+                  key={project.id}
+                  href={`/projetos/${project.slug}`}
+                  className="group min-w-0"
+                >
+                  {/* Capa */}
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-white/[0.10] bg-[#0d1016] transition-all duration-500 group-hover:-translate-y-1 group-hover:border-[#ff9f1c]/55 group-hover:shadow-[0_18px_55px_rgba(255,159,28,0.08)]">
+                    {project.cover_image ? (
+                      <img
+                        src={project.cover_image}
+                        alt={`Projeto ${project.title}`}
+                        loading="lazy"
+                        className="h-full w-full object-contain p-3 transition-transform duration-700 ease-out group-hover:scale-[1.025] sm:p-4"
+                      />
+                    ) : (
+                      <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-[#0a2540] via-[#101116] to-[#21120c]">
+                        <span className="text-5xl font-black tracking-[-0.06em] text-white/[0.12]">
+                          BLEND<span className="text-[#ff9f1c]/30">.</span>
+                        </span>
+                      </div>
+                    )}
+
+                    {/* Tratamento de luz */}
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-100" />
+
+                    <div
+                      aria-hidden="true"
+                      className="pointer-events-none absolute -bottom-16 left-1/2 h-28 w-3/4 -translate-x-1/2 rounded-full bg-[#ff9f1c]/0 blur-[55px] transition-colors duration-500 group-hover:bg-[#ff9f1c]/20"
+                    />
+                  </div>
+
+                  {/* Informações */}
+                  <div className="flex items-start justify-between gap-4 pt-4">
+                    <div className="min-w-0">
+                      <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#ff9f1c]">
+                        {project.category || "Projeto criativo"}
+                      </p>
+
+                      <h3 className="text-lg font-medium leading-snug tracking-tight text-white transition-colors duration-300 group-hover:text-[#ff9f1c] sm:text-xl">
+                        {project.title}
+                      </h3>
+
+                      {project.description && (
+                        <p className="mt-2 line-clamp-2 text-sm leading-6 text-white/45">
+                          {project.description}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        ) : (
+          <section className="relative py-24 text-center sm:py-32">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#0066ad]/10 blur-[100px]"
+            />
+
+            <div className="relative">
+              <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl border border-[#ff9f1c]/20 bg-[#ff9f1c]/[0.07] text-2xl text-[#ff9f1c]">
+                ✳
+              </span>
+
+              <h2 className="mt-6 text-2xl font-medium tracking-tight sm:text-3xl">
+                Novos projetos estão a caminho.
+              </h2>
+
+              <p className="mx-auto mt-4 max-w-md text-sm leading-7 text-white/50">
+                Estamos preparando novos trabalhos para apresentar por aqui.
+                Volte em breve para conhecer nosso portfólio.
+              </p>
+
+              <Link
+                href="/"
+                className="mt-8 inline-flex items-center gap-3 rounded-full border border-white/15 px-6 py-3 text-sm font-medium text-white/75 transition hover:border-[#ff9f1c]/50 hover:text-[#ff9f1c]"
+              >
+                Voltar para a página inicial
+                <span aria-hidden="true">↗</span>
+              </Link>
+            </div>
+          </section>
+        )}
+
           </div>
         </div>
       </section>

@@ -102,7 +102,7 @@ export default async function ProjetoPage({ params }: PageProps) {
           <span aria-hidden="true">/</span>
 
           <Link
-            href="/projetos"
+            href="/#projetos"
             className="transition hover:text-[#ff9f1c]"
           >
             Projetos
@@ -268,7 +268,7 @@ export default async function ProjetoPage({ params }: PageProps) {
         {/* Navegação inferior */}
         <footer className="mt-10 flex flex-col gap-4 border-t border-white/[0.08] pt-6 sm:flex-row sm:items-center sm:justify-between">
           <Link
-            href="/projetos"
+            href="/#projetos"
             className="inline-flex items-center gap-2 self-start text-sm text-white/55 transition hover:text-[#ff9f1c]"
           >
             <span aria-hidden="true">←</span>

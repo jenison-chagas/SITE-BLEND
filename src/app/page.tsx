@@ -727,22 +727,22 @@ export default function HomePage() {
                         {project.category || "Projeto criativo"}
                       </p>
 
-                      <div className="flex items-center justify-between gap-3">
-                        <h3 className="min-w-0 text-lg font-medium leading-snug tracking-tight text-white transition-colors duration-300 group-hover:text-[#ff9f1c] sm:text-xl">
-                          {project.title}
-                        </h3>
-                        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 shrink-0 text-[#ff9f1c]/75 transition-colors group-hover:text-[#ff9f1c]">
-                          <path d="m9 9 5.3 12 1.7-5 5-1.7L9 9Z" />
-                          <path d="M8 2v3M2 8h3M3.8 3.8l2.1 2.1M13 3l-1.5 2.5M3 13l2.5-1.5" />
-                        </svg>
-                        <span className="sr-only">Ver projeto completo</span>
-                      </div>
+                      <h3 className="text-lg font-medium leading-snug tracking-tight text-white transition-colors duration-300 group-hover:text-[#ff9f1c] sm:text-xl">
+                        {project.title}
+                      </h3>
 
                       {project.description && (
                         <p className="mt-2 line-clamp-2 text-sm leading-6 text-white/45">
                           {project.description}
                         </p>
                       )}
+                      <span className="mt-4 inline-flex items-center gap-3 rounded-full border border-[#ff9f1c]/70 bg-transparent px-4 py-2 text-[10px] font-semibold tracking-[0.12em] text-[#ff9f1c] transition-colors duration-300 group-hover:border-[#ff9f1c]">
+                        VER O PROJETO
+                        <svg aria-hidden="true" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 shrink-0">
+                          <path d="m11 18-5-5a2 2 0 0 1 2.8-2.8l7.2 7.2-3.3-9.1a2 2 0 0 1 3.8-1.4l2.7 7.4a2 2 0 0 1 3.7-1.4l.8 2a2 2 0 0 1 3.7.1l1.7 4.5c1.4 3.8-.3 7.8-4.1 9.2l-2.1.8c-2.7 1-5.6.3-7.5-1.8L9 21a2 2 0 0 1 2-3Z" />
+                          <path d="M9 2v3M2 8h3M3 3l2 2M15 2l-1.5 2.5" />
+                        </svg>
+                      </span>
                     </div>
                   </div>
                 </Link>

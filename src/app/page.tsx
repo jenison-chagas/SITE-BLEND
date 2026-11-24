@@ -4,7 +4,11 @@ import BlendServicesScroll from "@/components/BlendServicesScroll";
 import BlendMotion from "@/components/BlendMotion";
 
 export default function HomePage() {
-  const projects = localProjects.filter((project) => project.published);
+  const projects = localProjects.filter((project) => project.published).map((project) =>
+    project.slug === "grupo-alves-barreto"
+      ? { ...project, category: "Site institucional", description: project.description.replace("Projeto de Site", "Projeto de Site institucional") }
+      : project,
+  );
   return (
     <main className="min-h-screen overflow-x-clip bg-[#05070a] text-white">
       <BlendMotion />
@@ -718,14 +722,21 @@ export default function HomePage() {
 
                   {/* Informações */}
                   <div className="flex items-start justify-between gap-4 pt-4">
-                    <div className="min-w-0">
+                    <div className="min-w-0 w-full">
                       <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#ff9f1c]">
                         {project.category || "Projeto criativo"}
                       </p>
 
-                      <h3 className="text-lg font-medium leading-snug tracking-tight text-white transition-colors duration-300 group-hover:text-[#ff9f1c] sm:text-xl">
-                        {project.title}
-                      </h3>
+                      <div className="flex items-center justify-between gap-3">
+                        <h3 className="min-w-0 text-lg font-medium leading-snug tracking-tight text-white transition-colors duration-300 group-hover:text-[#ff9f1c] sm:text-xl">
+                          {project.title}
+                        </h3>
+                        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 shrink-0 text-[#ff9f1c]/75 transition-colors group-hover:text-[#ff9f1c]">
+                          <path d="m9 9 5.3 12 1.7-5 5-1.7L9 9Z" />
+                          <path d="M8 2v3M2 8h3M3.8 3.8l2.1 2.1M13 3l-1.5 2.5M3 13l2.5-1.5" />
+                        </svg>
+                        <span className="sr-only">Ver projeto completo</span>
+                      </div>
 
                       {project.description && (
                         <p className="mt-2 line-clamp-2 text-sm leading-6 text-white/45">

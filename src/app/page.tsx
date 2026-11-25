@@ -98,7 +98,7 @@ export default function HomePage() {
               />
             </a>
 
-            <nav className="hidden items-center gap-8 md:flex">
+            <nav aria-label="Navegação principal" className="hidden items-center gap-8 md:flex">
               <a
                 href="#sobre"
                 className="text-sm text-white/60 transition hover:text-white"

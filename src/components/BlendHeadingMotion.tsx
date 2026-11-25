@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { usePathname } from "next/navigation";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -15,6 +15,18 @@ const CARD_CONTAINERS = [
 
 export default function BlendHeadingMotion() {
   const pathname = usePathname();
+
+  useLayoutEffect(() => {
+    if (!pathname.startsWith("/projetos/") || window.location.hash) return;
+    const resetProjectScroll = () => window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    resetProjectScroll();
+    const frame = requestAnimationFrame(resetProjectScroll);
+    window.addEventListener("blend-loader-complete", resetProjectScroll);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("blend-loader-complete", resetProjectScroll);
+    };
+  }, [pathname]);
 
   useEffect(() => {
     if (pathname.startsWith("/admin") || pathname.startsWith("/auth")) return;
@@ -92,6 +104,9 @@ export default function BlendHeadingMotion() {
         gsap.ticker.add(tick);
         gsap.ticker.lagSmoothing(0);
         ScrollTrigger.refresh();
+        if (pathname.startsWith("/projetos/") && !window.location.hash) {
+          lenis.scrollTo(0, { immediate: true, force: true });
+        }
 
         return () => {
           gsap.ticker.remove(tick);

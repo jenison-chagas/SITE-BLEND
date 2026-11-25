@@ -100,10 +100,10 @@ export default function HomePage() {
 
             <nav className="hidden items-center gap-8 md:flex">
               <a
-                href="#projetos"
+                href="#sobre"
                 className="text-sm text-white/60 transition hover:text-white"
               >
-                Projetos
+                Sobre
               </a>
 
               <a
@@ -114,10 +114,10 @@ export default function HomePage() {
               </a>
 
               <a
-                href="#sobre"
+                href="#projetos"
                 className="text-sm text-white/60 transition hover:text-white"
               >
-                Sobre
+                Projetos
               </a>
 
               <a

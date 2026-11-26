@@ -119,18 +119,23 @@ export default function BlendHeadingMotion() {
           .filter((heading) => !heading.closest(CARD_CONTAINERS)
             && !heading.classList.contains("sr-only") && heading.getClientRects().length > 0);
         const owners = new Set<HTMLElement>();
-        headings.forEach((heading) => {
+        const splits: SplitText[] = [];
+        const context = gsap.context(() => {});
+        const pending = new Set<HTMLElement>();
+        const prepared = new Set<HTMLElement>();
+        let prepareFrame = 0;
+        const prepare = (heading: HTMLElement) => {
+          if (disposed || prepared.has(heading)) return;
+          prepared.add(heading);
           let element: HTMLElement | null = heading;
           while (element && element.tagName !== "MAIN") {
-            if (element.hasAttribute("data-reveal")) owners.add(element);
+            if (element.hasAttribute("data-reveal")) {
+              owners.add(element);
+              element.classList.add("blend-title-owner");
+            }
             element = element.parentElement;
           }
-        });
-        owners.forEach((element) => element.classList.add("blend-title-owner"));
-
-        const splits: SplitText[] = [];
-        const context = gsap.context(() => {
-          headings.forEach((heading) => {
+          context.add(() => {
             let played = false;
             const label = heading.innerText.replace(/\s+/g, " ").trim();
             const split = SplitText.create(heading, {
@@ -170,7 +175,24 @@ export default function BlendHeadingMotion() {
             });
             splits.push(split);
           });
-        });
+        };
+        const prepareNext = () => {
+          prepareFrame = 0;
+          const heading = pending.values().next().value;
+          if (!heading || disposed) return;
+          pending.delete(heading);
+          prepare(heading);
+          if (pending.size) prepareFrame = requestAnimationFrame(prepareNext);
+        };
+        const headingObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            headingObserver.unobserve(entry.target);
+            pending.add(entry.target as HTMLElement);
+          });
+          if (pending.size && !prepareFrame) prepareFrame = requestAnimationFrame(prepareNext);
+        }, { rootMargin: "0px 0px 20% 0px" });
+        headings.forEach((heading) => headingObserver.observe(heading));
 
         const lenis = new Lenis({ autoRaf: false, anchors: true, smoothWheel: true, syncTouch: false });
         activeSmoothScroll = lenis;
@@ -185,6 +207,9 @@ export default function BlendHeadingMotion() {
         if (returningToProjects.current) restoreProjects();
 
         return () => {
+          headingObserver.disconnect();
+          cancelAnimationFrame(prepareFrame);
+          pending.clear();
           gsap.ticker.remove(tick);
           lenis.off("scroll", ScrollTrigger.update);
           lenis.destroy();

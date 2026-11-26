@@ -1,14 +1,24 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type TrailPoint = { x: number; y: number; time: number };
 
 export default function BlendCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [enabled, setEnabled] = useState(false);
 
   useEffect(() => {
+    const media = window.matchMedia("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)");
+    const update = () => setEnabled(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
+
+  useEffect(() => {
+    if (!enabled) return;
     const cursor = cursorRef.current;
     const canvas = canvasRef.current;
     const context = canvas?.getContext("2d");
@@ -118,7 +128,7 @@ export default function BlendCursor() {
       document.removeEventListener("visibilitychange", visibility);
       media.removeEventListener("change", hide);
     };
-  }, []);
+  }, [enabled]);
 
   return (
     <div ref={cursorRef} className="blend-cursor" aria-hidden="true">

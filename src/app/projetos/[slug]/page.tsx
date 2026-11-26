@@ -1,4 +1,5 @@
 import ArtworkGallery from "@/components/sections/ArtworkGallery";
+import { ProjectBackToTop } from "@/components/BlendHeadingMotion";
 import LandingPageGallery from "@/components/sections/LandingPageGallery";
 import IdentityGallery from "@/components/sections/IdentityGallery";
 import FormatGallery from "@/components/sections/FormatGallery";
@@ -283,6 +284,9 @@ export default async function ProjetoPage({ params }: PageProps) {
             <span aria-hidden="true">↗</span>
           </Link>
         </footer>
+        <div className="mt-8 flex justify-end">
+          <ProjectBackToTop />
+        </div>
       </div>
     </main>
   );

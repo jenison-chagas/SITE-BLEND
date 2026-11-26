@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useLayoutEffect } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -13,10 +13,75 @@ const CARD_CONTAINERS = [
   '[aria-label="Portfólio completo de projetos"]', "[data-no-title-reveal]",
 ].join(",");
 
+let activeSmoothScroll: Lenis | null = null;
+let projectWasOpened = false;
+let historyListenerInstalled = false;
+
 export default function BlendHeadingMotion() {
   const pathname = usePathname();
+  const returningToProjects = useRef(false);
+
+  const restoreProjects = useCallback(() => {
+    const card = document.querySelector('[aria-label="Portfólio completo de projetos"]')?.parentElement;
+    if (!card) return false;
+    const headerBottom = document.querySelector("#blend-hero header")?.getBoundingClientRect().bottom ?? 0;
+    const top = Math.max(0, card.getBoundingClientRect().top + window.scrollY - Math.max(0, headerBottom) - 16);
+    if (activeSmoothScroll) {
+      activeSmoothScroll.resize();
+      activeSmoothScroll.scrollTo(top, { immediate: true, force: true });
+    } else window.scrollTo({ top, left: 0, behavior: "instant" });
+    return true;
+  }, []);
 
   useLayoutEffect(() => {
+    if (historyListenerInstalled) return;
+    historyListenerInstalled = true;
+    const onHistoryNavigation = () => {
+      if (window.location.pathname !== "/" || !projectWasOpened) return;
+      projectWasOpened = false;
+      returningToProjects.current = true;
+      let frame = 0;
+      let timer = 0;
+      let attempts = 0;
+      let stopped = false;
+      const observer = new ResizeObserver(() => { if (!stopped) restoreProjects(); });
+      const finish = () => {
+        stopped = true;
+        returningToProjects.current = false;
+        cancelAnimationFrame(frame);
+        window.clearTimeout(timer);
+        observer.disconnect();
+        window.removeEventListener("wheel", finish);
+        window.removeEventListener("touchstart", finish);
+        window.removeEventListener("keydown", finish);
+      };
+      const restoreWhenReady = () => {
+        if (stopped || window.location.pathname !== "/") return finish();
+        if (!restoreProjects()) {
+          if (++attempts < 120) frame = requestAnimationFrame(restoreWhenReady);
+          else finish();
+          return;
+        }
+        const main = document.querySelector("main");
+        if (main) observer.observe(main);
+        frame = requestAnimationFrame(restoreProjects);
+        timer = window.setTimeout(finish, 600);
+      };
+      window.addEventListener("wheel", finish, { once: true, passive: true });
+      window.addEventListener("touchstart", finish, { once: true, passive: true });
+      window.addEventListener("keydown", finish, { once: true });
+      frame = requestAnimationFrame(restoreWhenReady);
+    };
+    window.addEventListener("popstate", onHistoryNavigation, true);
+    // This listener belongs to the app, including cached history entries.
+  }, [pathname, restoreProjects]);
+
+  useLayoutEffect(() => {
+    if (pathname === "/") {
+      const timer = window.setTimeout(() => { projectWasOpened = false; }, 0);
+      return () => window.clearTimeout(timer);
+    }
+    if (pathname.startsWith("/projetos/")) projectWasOpened = true;
     if (!pathname.startsWith("/projetos/") || window.location.hash) return;
     const resetProjectScroll = () => window.scrollTo({ top: 0, left: 0, behavior: "instant" });
     resetProjectScroll();
@@ -26,7 +91,7 @@ export default function BlendHeadingMotion() {
       cancelAnimationFrame(frame);
       window.removeEventListener("blend-loader-complete", resetProjectScroll);
     };
-  }, [pathname]);
+  }, [pathname, restoreProjects]);
 
   useEffect(() => {
     if (pathname.startsWith("/admin") || pathname.startsWith("/auth")) return;
@@ -99,6 +164,7 @@ export default function BlendHeadingMotion() {
         });
 
         const lenis = new Lenis({ autoRaf: false, anchors: true, smoothWheel: true, syncTouch: false });
+        activeSmoothScroll = lenis;
         const tick = (time: number) => lenis.raf(time * 1000);
         lenis.on("scroll", ScrollTrigger.update);
         gsap.ticker.add(tick);
@@ -107,11 +173,13 @@ export default function BlendHeadingMotion() {
         if (pathname.startsWith("/projetos/") && !window.location.hash) {
           lenis.scrollTo(0, { immediate: true, force: true });
         }
+        if (returningToProjects.current) restoreProjects();
 
         return () => {
           gsap.ticker.remove(tick);
           lenis.off("scroll", ScrollTrigger.update);
           lenis.destroy();
+          if (activeSmoothScroll === lenis) activeSmoothScroll = null;
           context.revert();
           splits.forEach((split) => split.revert());
           owners.forEach((element) => element.classList.remove("blend-title-owner"));
@@ -144,7 +212,7 @@ export default function BlendHeadingMotion() {
       };
     });
     return () => media.revert();
-  }, [pathname]);
+  }, [pathname, restoreProjects]);
 
   return <style>{`
     html.blend-motion-ready [data-reveal].blend-title-owner {
@@ -171,6 +239,7 @@ export default function BlendHeadingMotion() {
     }
   `}</style>;
 }
+
 
 
 

@@ -17,6 +17,15 @@ let activeSmoothScroll: Lenis | null = null;
 let projectWasOpened = false;
 let historyListenerInstalled = false;
 
+export function scrollToProjectTop() {
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (activeSmoothScroll) {
+    activeSmoothScroll.scrollTo(0, { force: true, duration: 0.9, immediate: reducedMotion });
+  } else {
+    window.scrollTo({ top: 0, left: 0, behavior: reducedMotion ? "instant" : "smooth" });
+  }
+}
+
 export default function BlendHeadingMotion() {
   const pathname = usePathname();
   const returningToProjects = useRef(false);
@@ -243,3 +252,19 @@ export default function BlendHeadingMotion() {
 
 
 
+
+export function ProjectBackToTop() {
+  return (
+    <button
+      type="button"
+      onClick={scrollToProjectTop}
+      aria-label="Voltar ao topo"
+      title="Voltar ao topo"
+      className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-[#ff9f1c]/70 bg-transparent text-[#ff9f1c] transition duration-300 hover:-translate-y-1 hover:border-[#ff9f1c] hover:shadow-[0_0_24px_rgba(255,159,28,0.15)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ff9f1c] motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+    >
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+        <path d="M12 19V5M5 12l7-7 7 7" />
+      </svg>
+    </button>
+  );
+}

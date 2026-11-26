@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { localProjects } from "@/lib/local-projects";
 import BlendServicesScroll from "@/components/BlendServicesScroll";
 import BlendMotion from "@/components/BlendMotion";
@@ -91,8 +92,11 @@ export default function HomePage() {
         <header className="relative z-30">
           <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 md:px-10 lg:px-16">
             <a>
-              <img
+              <Image
                 src="/images/logo.png"
+                width={121}
+                height={40}
+                sizes="121px"
                 alt="Blend Creative Design Studio"
                 className="h-10 w-auto object-contain"
               />
@@ -235,18 +239,27 @@ export default function HomePage() {
                 <img
                   src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=faces&q=80"
                   alt="Retrato de cliente"
+                  width={100}
+                  height={100}
+                  decoding="async"
                   referrerPolicy="no-referrer"
                 />
 
                 <img
                   src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&h=100&q=80"
                   alt="Retrato de cliente"
+                  width={100}
+                  height={100}
+                  decoding="async"
                   referrerPolicy="no-referrer"
                 />
 
                 <img
                   src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=100&h=100&q=80"
                   alt="Retrato de cliente"
+                  width={100}
+                  height={100}
+                  decoding="async"
                   referrerPolicy="no-referrer"
                 />
 
@@ -697,8 +710,10 @@ export default function HomePage() {
                   {/* Capa */}
                   <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-white/[0.10] bg-[#0d1016] transition-all duration-500 group-hover:-translate-y-1 group-hover:border-[#ff9f1c]/55 group-hover:shadow-[0_18px_55px_rgba(255,159,28,0.08)]">
                     {project.cover_image ? (
-                      <img
+                      <Image
                         src={project.cover_image}
+                        fill
+                        sizes="(max-width: 639px) 85vw, (max-width: 1023px) 42vw, 30vw"
                         alt={`Projeto ${project.title}`}
                         loading="lazy"
                         className="h-full w-full object-contain p-3 transition-transform duration-700 ease-out group-hover:scale-[1.025] sm:p-4"

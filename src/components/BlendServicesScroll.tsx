@@ -280,7 +280,7 @@ export default function BlendServicesScroll() {
                     alt={service.imageAlt}
                     width={1280}
                     height={801}
-                    loading="eager"
+                    loading="lazy"
                     decoding="async"
                   />
                 </div>

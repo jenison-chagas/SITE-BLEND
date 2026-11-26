@@ -24,7 +24,7 @@ export default function RootLayout({
   <CinematicLoader
     logoSrc="/images/logo.png"
     brandName="BLEND CREATIVE"
-    minDuration={5400}
+    minDuration={1200}
   />
 
   <BlendCursor />

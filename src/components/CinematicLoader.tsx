@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import "./CinematicLoader.css";
 
 type CinematicLoaderProps = {
@@ -12,7 +13,7 @@ type CinematicLoaderProps = {
 export default function CinematicLoader({
   logoSrc = "/images/logo.png",
   brandName = "BLEND CREATIVE",
-  minDuration = 2400,
+  minDuration = 1200,
 }: CinematicLoaderProps) {
   const [progress, setProgress] = useState(0);
   const [isExiting, setIsExiting] = useState(false);
@@ -81,9 +82,13 @@ export default function CinematicLoader({
       <div className="cinematic-loader__content">
         <div className="cinematic-loader__brand">
           {showLogo && (
-            <img
+            <Image
               className="cinematic-loader__logo"
               src={logoSrc}
+              width={220}
+              height={73}
+              sizes="(max-width: 767px) 190px, 220px"
+              preload
               alt={`Logo ${brandName}`}
               onError={() => setShowLogo(false)}
             />

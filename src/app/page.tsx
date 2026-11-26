@@ -710,10 +710,8 @@ export default function HomePage() {
                   {/* Capa */}
                   <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-white/[0.10] bg-[#0d1016] transition-all duration-500 group-hover:-translate-y-1 group-hover:border-[#ff9f1c]/55 group-hover:shadow-[0_18px_55px_rgba(255,159,28,0.08)]">
                     {project.cover_image ? (
-                      <Image
+                      <img
                         src={project.cover_image}
-                        fill
-                        sizes="(max-width: 639px) 85vw, (max-width: 1023px) 42vw, 30vw"
                         alt={`Projeto ${project.title}`}
                         loading="lazy"
                         className="h-full w-full object-contain p-3 transition-transform duration-700 ease-out group-hover:scale-[1.025] sm:p-4"
